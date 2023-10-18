@@ -9,7 +9,9 @@ def writePixel(x: int, y: int, Bytes: bytes, local_buff = True):
     if 0 <= x < WIDTH and 0 <= y < HEIGHT:
         position = (y * WIDTH + x) * BYTES_PER_PIXEL
         if local_buff:
-            LOCAL_BUFFER[position:position+BYTES_PER_PIXEL] = Bytes
+            buffer_list = bytearray(LOCAL_BUFFER)
+            buffer_list[position:position+BYTES_PER_PIXEL] = Bytes
+            LOCAL_BUFFER = bytes(buffer_list)
         else:
             SYS_VIDEO_BUFFER.seek(position)
             SYS_VIDEO_BUFFER.write(Bytes)
