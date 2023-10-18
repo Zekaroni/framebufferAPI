@@ -5,6 +5,8 @@ def drawSquare(size: int, start_x: int, start_y: int, Byte: bytes):
         for i in range(start_x, start_x + size):
             fb.queueLocalChange(i, j, Byte)
 
+
+fb.initTerminal()
 drawSquare(100,0,0,b'\x00\xff\xff\x00')
 drawSquare(100,100,0,b'\x44\xfe\xd2\x00')
 drawSquare(400,200,0,b'\x00\x00\xFF\x00')

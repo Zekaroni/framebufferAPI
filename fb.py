@@ -31,6 +31,8 @@ def syncBuffers() -> None:
     SYS_VIDEO_BUFFER.seek(0)
     SYS_VIDEO_BUFFER.write(LOCAL_BUFFER)
 
+def initTerminal() -> None:
+    print("\n"*(HEIGHT//16))
 
 # def getBufferSize() -> int:
 #     return len(getCurrentBuffer())/4
