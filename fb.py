@@ -32,7 +32,8 @@ def syncBuffers() -> None:
     SYS_VIDEO_BUFFER.write(LOCAL_BUFFER)
 
 def initTerminal() -> None:
-    print("\n"*(HEIGHT//16))
+    print("\x1b[2J\x1b[H",end="")
+    print("\n"*(HEIGHT//14))
 
 # def getBufferSize() -> int:
 #     return len(getCurrentBuffer())/4
