@@ -21,6 +21,7 @@ def queueLocalChange(x: int, y: int, Bytes: bytes):
         LOCAL_QUEUE.append([position,Bytes])
         
 def updateLocalBuffer() -> None:
+    global LOCAL_BUFFER
     buffer_list = bytearray(LOCAL_BUFFER)
     for position, Bytes in LOCAL_QUEUE:
         buffer_list[position:position+BYTES_PER_PIXEL] = Bytes
