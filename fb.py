@@ -32,13 +32,14 @@ def syncBuffers() -> None:
     SYS_VIDEO_BUFFER.write(LOCAL_BUFFER)
 
 def clearFrameBuffer(Bytes: bytes = b'\x00\x00\x00\x00') -> None:
-    for i in range(HEIGHT):
-        for j in range(WIDTH):
+    for i in range(WIDTH):
+        for j in range(HEIGHT):
             queueLocalChange(i,j,Bytes)
     updateLocalBuffer()
     syncBuffers()
 
 def initTerminal() -> None:
+    print("\x1b[2J\x1b[H",end="")
     clearFrameBuffer()
     print("\n"*(HEIGHT//14))
 
