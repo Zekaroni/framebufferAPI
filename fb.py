@@ -1,5 +1,5 @@
-WIDTH = 1366
-HEIGHT = 768
+WIDTH = 1280
+HEIGHT = 800
 BYTES_PER_PIXEL = 4
 SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 
