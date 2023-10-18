@@ -5,6 +5,7 @@ SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 LOCAL_BUFFER = SYS_VIDEO_BUFFER.read()
 
 def writePixel(x: int, y: int, byte: bytes, local_buff = True):
+    global LOCAL_BUFFER
     if 0 <= x < WIDTH and 0 <= y < HEIGHT:
         position = (y * WIDTH + x) * BYTES_PER_PIXEL
         if local_buff:
