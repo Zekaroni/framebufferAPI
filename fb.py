@@ -6,7 +6,7 @@ SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 
 def writePixel(x: int, y: int, byte: bytes):
     if 0 <= x < WIDTH and 0 <= y < HEIGHT:
-        position = (y * WIDTH + x) * BYTES_PER_PIXEL + (40 * y)
+        position = (y * WIDTH + x) * BYTES_PER_PIXEL
         SYS_VIDEO_BUFFER.seek(position)
         SYS_VIDEO_BUFFER.write(byte)
 
