@@ -3,7 +3,7 @@ HEIGHT = 800
 BYTES_PER_PIXEL = 4
 SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 LOCAL_BUFFER = SYS_VIDEO_BUFFER.read()
-LOCAL_QUEUE = [] # Stores arrays that contain [position, Byte]
+LOCAL_QUEUE = []
 
 def writePixel(x: int, y: int, Bytes: bytes):
     if 0 <= x < WIDTH and 0 <= y < HEIGHT:
@@ -35,12 +35,16 @@ def initTerminal() -> None:
     print("\x1b[2J\x1b[H",end="")
     print("\n"*(HEIGHT//14))
 
-# def getBufferSize() -> int:
-#     return len(getCurrentBuffer())/4
+def drawSquare(size: int, start_x: int, start_y: int, Byte: bytes):
+    for j in range(start_y, start_y + size):
+        for i in range(start_x, start_x + size):
+            queueLocalChange(i, j, Byte)
 
-# def getCurrentBuffer() -> bytes:
-#     return bytes(SYS_VIDEO_BUFFER)
 
-
-# def clearBuffer(Bytes: bytes = b'\x00') -> None:
-#     writeBuffer(Bytes*(WIDTH*HEIGHT*BYTES_PER_PIXEL))
+initTerminal()
+drawSquare(100,0,0,b'\x00\xff\xff\x00')
+drawSquare(100,100,0,b'\x44\xfe\xd2\x00')
+drawSquare(400,200,0,b'\x00\x00\xFF\x00')
+drawSquare(200,0,100,b'\xFF\x00\x00\x00')
+updateLocalBuffer()
+syncBuffers()
