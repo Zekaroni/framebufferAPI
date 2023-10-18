@@ -40,7 +40,6 @@ def clearFrameBuffer(Bytes: bytes = b'\x00\x00\x00\x00') -> None:
 
 def initTerminal() -> None:
     clearFrameBuffer()
-    print("\x1b[2J\x1b[H",end="")
     print("\n"*(HEIGHT//14))
 
 def drawSquare(size: int, start_x: int, start_y: int, Byte: bytes):
