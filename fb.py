@@ -4,15 +4,15 @@ BYTES_PER_PIXEL = 4
 SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 LOCAL_BUFFER = SYS_VIDEO_BUFFER.read()
 
-def writePixel(x: int, y: int, byte: bytes, local_buff = True):
+def writePixel(x: int, y: int, Bytes: bytes, local_buff = True):
     global LOCAL_BUFFER
     if 0 <= x < WIDTH and 0 <= y < HEIGHT:
         position = (y * WIDTH + x) * BYTES_PER_PIXEL
         if local_buff:
-            LOCAL_BUFFER = LOCAL_BUFFER[:position] + byte + LOCAL_BUFFER[position+2:]
+            LOCAL_BUFFER[position:position+BYTES_PER_PIXEL] = Bytes
         else:
             SYS_VIDEO_BUFFER.seek(position)
-            SYS_VIDEO_BUFFER.write(byte)
+            SYS_VIDEO_BUFFER.write(Bytes)
 
 def writeBuffer(Bytes: bytes, position: int = 0) -> None:
     SYS_VIDEO_BUFFER.seek(position)
