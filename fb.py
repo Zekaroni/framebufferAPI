@@ -44,6 +44,10 @@ def syncBuffers() -> None:
     SYS_VIDEO_BUFFER.seek(0)
     SYS_VIDEO_BUFFER.write(LOCAL_BUFFER)
 
+def updateFrameBuffer() -> None:
+    updateLocalBuffer()
+    syncBuffers()
+
 def clearFrameBuffer(Bytes: bytes = b'\x00\x00\x00\x00') -> None:
     for i in range(WIDTH):
         for j in range(HEIGHT):
@@ -72,6 +76,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
     c = (start_x*end_x-end_y*start_x)/(end_x-start_x)
     for x in range(end_x-start_x):
         for i in range(thickness):
+            # TODO: Fix thickness for x axis
             y = round(m*(x+start_x+i)+c)
             queueLocalChange(x,y,colour)
             queueLocalChange(x,y-(i*2),colour) # Nice :)
@@ -86,6 +91,7 @@ def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickne
     while y < x:
         for i in range(thickness):
             # TODO: Find optimizations for this, especially thickness
+            # NOTE: Too much math for thickness on x, so nah I'm good
             for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
                 queueLocalChange(center_x + (x*x_sign), center_y + (y*y_sign) + i, colour)
             for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
@@ -112,8 +118,11 @@ def debug() -> None:
     drawRectangle(100,500,0,400,COLOURS["GREEN"])
     drawLine(0,0,200,200,COLOURS["WHITE"])
     drawCircle(300,150,50,COLOURS["PASTEL_PINK"],thickness=3)
-    updateLocalBuffer()
-    syncBuffers()
+    updateFrameBuffer()
+
+def drawTicTacToeBoard():
+    drawLine(50,200,50,500,COLOURS["WHITE"])
+    updateFrameBuffer()
 
 if __name__ == "__main__":
-    debug()
+    drawTicTacToeBoard()
