@@ -111,7 +111,7 @@ def debug() -> None:
     drawSquare(200,0,100,COLOURS["PURPLE"])
     drawRectangle(100,500,0,400,COLOURS["GREEN"])
     drawLine(0,0,200,200,COLOURS["WHITE"])
-    drawCircle(300,150,30,COLOURS["PASTEL_PINK"],thickness=50)
+    drawCircle(300,150,50,COLOURS["PASTEL_PINK"],thickness=3)
     updateLocalBuffer()
     syncBuffers()
 
