@@ -29,7 +29,7 @@ def writeBuffer(Bytes: bytes, position: int = 0) -> None:
 
 def queueLocalChange(x: int, y: int, Bytes: bytes):
     if 0 <= x < WIDTH and 0 <= y < HEIGHT:
-        position = (y * WIDTH + x) * BYTES_PER_PIXEL
+        position = getPosition(x,y)
         LOCAL_QUEUE[position] = Bytes
         
 def updateLocalBuffer() -> None:
