@@ -66,9 +66,9 @@ def drawSquare(size: int, start_x: int, start_y: int, colour: bytes) -> None:
             queueLocalChange(i, j, colour)
 
 
-def drawRectangle(size_x: int, size_y: int, start_x: int, start_y: int, colour: bytes) -> None:
-    for j in range(start_y, start_y + size_x):
-        for i in range(start_x, start_x + size_y):
+def drawRectangle(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes) -> None:
+    for j in range(start_y, end_y):
+        for i in range(start_x, end_x):
             queueLocalChange(i, j, colour)
 
 def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 3) -> None:
