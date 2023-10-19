@@ -102,6 +102,9 @@ def drawChessBoard() -> None:
             x_value += tile_size
         x_value=0
         y_value+=tile_size
+    initTerminal()
+    updateLocalBuffer()
+    syncBuffers()
 
 if __name__ == "__main__":
     drawChessBoard()
