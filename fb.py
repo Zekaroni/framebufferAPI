@@ -95,13 +95,15 @@ def debug() -> None:
 def drawChessBoard() -> None:
     x_value = 0
     y_value = 0
+    shift = 0
     tile_size = 50
     for row in range(8):
         for column in range(8):
-            drawSquare(tile_size,x_value,y_value,COLOURS["WHITE"] if column%2==0 else COLOURS["BLACK"])
+            drawSquare(tile_size,x_value,y_value,COLOURS["WHITE"] if (column+(shift%2))%2==0 else COLOURS["BLACK"])
             x_value += tile_size
         x_value=0
         y_value+=tile_size
+        shift+=1
     initTerminal()
     updateLocalBuffer()
     syncBuffers()
