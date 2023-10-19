@@ -76,16 +76,24 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
             queueLocalChange(x,y,colour)
             queueLocalChange(x,y-(i*2),colour) # Nice :)
 
-def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes) -> None:
-    # Not quite
+def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickness: int) -> None:
+    """
+    TODO: While this isn't too bad, find another way eventually
+    """
     e = -radius
     x = radius
     y = 0
     while y < x:
-        for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
-            queueLocalChange(center_x + (x*x_sign), center_y + (y*y_sign), colour)
-        for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
-            queueLocalChange(center_x + (y*y_sign), center_y + (x*x_sign), colour)
+        for i in range(thickness):
+            # TODO: Find optimizations for this, especially thickness
+            for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
+                queueLocalChange(center_x + (x*x_sign) + i, center_y + (y*y_sign) + i, colour)
+            for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
+                queueLocalChange(center_x + (y*y_sign) + i, center_y + (x*x_sign) + i, colour)
+            for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
+                queueLocalChange(center_x + (x*x_sign) - i, center_y + (y*y_sign) - i, colour)
+            for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
+                queueLocalChange(center_x + (y*y_sign) - i, center_y + (x*x_sign) - i, colour)
         e+=2*y+1
         y+=1
         if e >= 0:
