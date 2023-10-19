@@ -122,7 +122,8 @@ def debug() -> None:
 
 def drawTicTacToeBoard():
     initTerminal()
-    drawLine(50,200,51,500,COLOURS["WHITE"])
+    drawRectangle(50,200,60,500,COLOURS["WHITE"])
+    drawRectangle(150,200,160,500,COLOURS["WHITE"])
     updateFrameBuffer()
 
 if __name__ == "__main__":
