@@ -98,7 +98,7 @@ def drawChessBoard() -> None:
     tile_size = 50
     for row in range(8):
         for column in range(8):
-            drawSquare(tile_size,x_value,y_value,COLOURS["BLACK"] if column%2==0 else COLOURS["BLACK"])
+            drawSquare(tile_size,x_value,y_value,COLOURS["WHITE"] if column%2==0 else COLOURS["BLACK"])
             x_value += tile_size
         x_value=0
         y_value+=tile_size
