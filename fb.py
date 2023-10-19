@@ -3,7 +3,7 @@ HEIGHT = 800
 BYTES_PER_PIXEL = 4
 SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 LOCAL_BUFFER = SYS_VIDEO_BUFFER.read()
-LOCAL_QUEUE = []
+LOCAL_QUEUE = [] # TODO: Maybe use a dict so the position is only written to once, using the latest value it has recieved
 
 def writePixel(x: int, y: int, Bytes: bytes):
     if 0 <= x < WIDTH and 0 <= y < HEIGHT:
@@ -40,7 +40,7 @@ def clearFrameBuffer(Bytes: bytes = b'\x00\x00\x00\x00') -> None:
 
 def initTerminal() -> None:
     print("\x1b[2J\x1b[H",end="")
-    clearFrameBuffer()
+    # clearFrameBuffer()
     print("\n"*(HEIGHT//14))
 
 def drawSquare(size: int, start_x: int, start_y: int, Byte: bytes):
