@@ -81,7 +81,7 @@ def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes) -> None
     x = radius
     y = 0
     while y < x:
-        queueLocalChange(center_x + x, center_y + y)
+        queueLocalChange(center_x + x, center_y + y, colour)
         e+=2*y+1
         y+=1
         if e >= 0:
