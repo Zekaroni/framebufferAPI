@@ -121,7 +121,7 @@ def debug() -> None:
     updateFrameBuffer()
 
 def drawTicTacToeBoard():
-    drawLine(50,200,50,500,COLOURS["WHITE"])
+    drawLine(50,200,51,500,COLOURS["WHITE"])
     updateFrameBuffer()
 
 if __name__ == "__main__":
