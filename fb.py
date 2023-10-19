@@ -3,7 +3,7 @@ HEIGHT = 800
 BYTES_PER_PIXEL = 4
 SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 LOCAL_BUFFER = SYS_VIDEO_BUFFER.read()
-LOCAL_QUEUE = {} # TODO: Maybe use a dict so the position is only written to once, using the latest value it has recieved
+LOCAL_QUEUE = {}
 
 COLOURS = {
     "RED":    b'\x00\x00\xFF\x00',
@@ -77,13 +77,31 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
             queueLocalChange(x,y-(i*2),colour) # Nice :)
 
 
+def debug() -> None:
+    """
+    For debugging
+    """
+    initTerminal()
+    drawSquare(100,0,0,COLOURS["RED"])
+    drawSquare(100,100,0,COLOURS["GREEN"])
+    drawSquare(400,200,0,COLOURS["BLUE"])
+    drawSquare(200,0,100,COLOURS["PURPLE"])
+    drawRectangle(100,500,0,400,COLOURS["GREEN"])
+    drawLine(0,0,200,200,b'\x00\x00\x00\x00')
+    updateLocalBuffer()
+    syncBuffers()
 
-initTerminal()
-drawSquare(100,0,0,COLOURS["RED"])
-drawSquare(100,100,0,COLOURS["GREEN"])
-drawSquare(400,200,0,COLOURS["BLUE"])
-drawSquare(200,0,100,COLOURS["PURPLE"])
-drawRectangle(100,500,0,400,COLOURS["GREEN"])
-drawLine(0,0,200,200,b'\x00\x00\x00\x00')
-updateLocalBuffer()
-syncBuffers()
+
+def drawChessBoard() -> None:
+    x_value = 0
+    y_value = 0
+    tile_size = 50
+    for row in range(8):
+        for column in range(8):
+            drawSquare(tile_size,x_value,y_value,COLOURS["BLACK"] if column%2==0 else COLOURS["BLACK"])
+            x_value += tile_size
+        x_value=0
+        y_value+=tile_size
+
+if __name__ == "__main__":
+    drawChessBoard()
