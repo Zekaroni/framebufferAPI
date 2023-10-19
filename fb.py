@@ -12,9 +12,12 @@ COLOURS = {
     "PURPLE": b'\xFF\x00\xFF\x00',
 }
 
+def getPosition(x: int, y: int):
+    return (y * WIDTH + x) * BYTES_PER_PIXEL
+
 def writePixel(x: int, y: int, Bytes: bytes):
     if 0 <= x < WIDTH and 0 <= y < HEIGHT:
-        position = (y * WIDTH + x) * BYTES_PER_PIXEL
+        position = getPosition(x,y)
         SYS_VIDEO_BUFFER.seek(position)
         SYS_VIDEO_BUFFER.write(Bytes)
 
@@ -61,6 +64,13 @@ def drawRectangle(size_x: int, size_y: int, start_x: int, start_y: int, colour: 
         for i in range(start_x, start_x + size_y):
             queueLocalChange(i, j, colour)
 
+def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 3):
+    m = (end_y-start_y)/(end_x-start_x)
+    c = (start_x*end_x-end_y*start_x)/(end_x-start_x)
+    for x in range(end_x-start_x):
+        y = round(m*(x+start_x)+c)
+        queueLocalChange(x,y,colour)
+
 
 initTerminal()
 drawSquare(100,0,0,COLOURS["RED"])
@@ -68,5 +78,6 @@ drawSquare(100,100,0,COLOURS["GREEN"])
 drawSquare(400,200,0,COLOURS["BLUE"])
 drawSquare(200,0,100,COLOURS["PURPLE"])
 drawRectangle(100,500,0,400,COLOURS["GREEN"])
+drawLine(0,0,200,200)
 updateLocalBuffer()
 syncBuffers()
