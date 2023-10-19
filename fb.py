@@ -3,13 +3,15 @@ HEIGHT = 800
 BYTES_PER_PIXEL = 4
 SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 LOCAL_BUFFER = SYS_VIDEO_BUFFER.read()
-LOCAL_QUEUE = [] # TODO: Maybe use a dict so the position is only written to once, using the latest value it has recieved
+LOCAL_QUEUE = {} # TODO: Maybe use a dict so the position is only written to once, using the latest value it has recieved
 
 COLOURS = {
-    "RED": b'\x00\x00\xFF\x00',
-    "GREEN": b'\x00\xFF\x00\x00',
-    "BLUE": b'\xFF\x00\x00\x00',
+    "RED":    b'\x00\x00\xFF\x00',
+    "GREEN":  b'\x00\xFF\x00\x00',
+    "BLUE":   b'\xFF\x00\x00\x00',
     "PURPLE": b'\xFF\x00\xFF\x00',
+    "WHITE":  b'\xFF\xFF\xFF\x00',
+    "BLACK":  b'\x00\x00\x00\x00',
 }
 
 def getPosition(x: int, y: int):
@@ -28,13 +30,13 @@ def writeBuffer(Bytes: bytes, position: int = 0) -> None:
 def queueLocalChange(x: int, y: int, Bytes: bytes):
     if 0 <= x < WIDTH and 0 <= y < HEIGHT:
         position = (y * WIDTH + x) * BYTES_PER_PIXEL
-        LOCAL_QUEUE.append([position,Bytes])
+        LOCAL_QUEUE[position] = Bytes
         
 def updateLocalBuffer() -> None:
     global LOCAL_BUFFER
     buffer_list = bytearray(LOCAL_BUFFER)
-    for position, Bytes in LOCAL_QUEUE:
-        buffer_list[position:position+BYTES_PER_PIXEL] = Bytes
+    for position in LOCAL_QUEUE:
+        buffer_list[position:position+BYTES_PER_PIXEL] = LOCAL_QUEUE[position]
     LOCAL_BUFFER = bytes(buffer_list)
 
 def syncBuffers() -> None:
@@ -64,7 +66,7 @@ def drawRectangle(size_x: int, size_y: int, start_x: int, start_y: int, colour: 
         for i in range(start_x, start_x + size_y):
             queueLocalChange(i, j, colour)
 
-def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 20):
+def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 3):
     m = (end_y-start_y)/(end_x-start_x)
     c = (start_x*end_x-end_y*start_x)/(end_x-start_x)
     for x in range(end_x-start_x):
@@ -72,7 +74,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
             y = round(m*(x+start_x+i)+c)
             if y<0:y=0
             queueLocalChange(x,y,colour)
-            queueLocalChange(x,y-(i*2),colour)
+            queueLocalChange(x,y-(i*2),colour) # Nice :)
 
 
 
