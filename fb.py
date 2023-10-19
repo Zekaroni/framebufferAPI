@@ -84,7 +84,7 @@ def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes) -> None
     while y < x:
         for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
             queueLocalChange(center_x + (x*x_sign), center_y + (y*y_sign), colour)
-        for y_sign, x_sign in [[1,1][1,-1],[-1,1],[-1,-1]]:
+        for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
             queueLocalChange(center_x + (y*y_sign), center_y + (x*x_sign), colour)
         e+=2*y+1
         y+=1
