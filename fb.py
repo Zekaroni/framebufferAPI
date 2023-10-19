@@ -87,13 +87,13 @@ def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickne
         for i in range(thickness):
             # TODO: Find optimizations for this, especially thickness
             for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
-                queueLocalChange(center_x + (x*x_sign) + i, center_y + (y*y_sign) + i, colour)
+                queueLocalChange(center_x + (x*x_sign), center_y + (y*y_sign) + i, colour)
             for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
-                queueLocalChange(center_x + (y*y_sign) + i, center_y + (x*x_sign) + i, colour)
+                queueLocalChange(center_x + (y*y_sign), center_y + (x*x_sign) + i, colour)
             for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
-                queueLocalChange(center_x + (x*x_sign) - i, center_y + (y*y_sign) - i, colour)
+                queueLocalChange(center_x + (x*x_sign), center_y + (y*y_sign) - i, colour)
             for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
-                queueLocalChange(center_x + (y*y_sign) - i, center_y + (x*x_sign) - i, colour)
+                queueLocalChange(center_x + (y*y_sign), center_y + (x*x_sign) - i, colour)
         e+=2*y+1
         y+=1
         if e >= 0:
