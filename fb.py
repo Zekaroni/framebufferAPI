@@ -66,7 +66,7 @@ def drawRectangle(size_x: int, size_y: int, start_x: int, start_y: int, colour: 
         for i in range(start_x, start_x + size_y):
             queueLocalChange(i, j, colour)
 
-def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 3):
+def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 3) -> None:
     m = (end_y-start_y)/(end_x-start_x)
     c = (start_x*end_x-end_y*start_x)/(end_x-start_x)
     for x in range(end_x-start_x):
@@ -74,6 +74,18 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
             y = round(m*(x+start_x+i)+c)
             queueLocalChange(x,y,colour)
             queueLocalChange(x,y-(i*2),colour) # Nice :)
+
+def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes) -> None:
+    e = -radius
+    x = radius
+    y = 0
+    while y < x:
+        queueLocalChange(center_x + x, center_y + y)
+        e+=2*y+1
+        y+=1
+        if e >= 0:
+            e -2*x-1
+            x-=1
 
 
 def debug() -> None:
@@ -90,9 +102,5 @@ def debug() -> None:
     updateLocalBuffer()
     syncBuffers()
 
-
-def main():
-    pass
-
 if __name__ == "__main__":
-    main()
+    debug()
