@@ -120,6 +120,10 @@ def debug() -> None:
     updateFrameBuffer()
 
 def drawTicTacToeBoard():
+    # TODO: Make some math logic that will detemine board size and render it accoding to variables
+    # board_size = 0
+    # line_thickness = 5
+
     initTerminal()
     drawRectangle(150,200,160,500,COLOURS["WHITE"])
     drawRectangle(250,200,260,500,COLOURS["WHITE"])
