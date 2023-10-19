@@ -52,12 +52,11 @@ def clearFrameBuffer(Bytes: bytes = b'\x00\x00\x00\x00') -> None:
     for i in range(WIDTH):
         for j in range(HEIGHT):
             queueLocalChange(i,j,Bytes)
-    updateLocalBuffer()
-    syncBuffers()
+    updateFrameBuffer()
 
 def initTerminal() -> None:
     print("\x1b[2J\x1b[H",end="")
-    # clearFrameBuffer()
+    clearFrameBuffer()
     print("\n"*(HEIGHT//14))
 
 def drawSquare(size: int, start_x: int, start_y: int, colour: bytes) -> None:
@@ -124,6 +123,7 @@ def drawTicTacToeBoard():
     initTerminal()
     drawRectangle(150,200,160,500,COLOURS["WHITE"])
     drawRectangle(250,200,260,500,COLOURS["WHITE"])
+    drawRectangle(100,250,350,260,COLOURS["WHITE"])
     updateFrameBuffer()
 
 if __name__ == "__main__":
