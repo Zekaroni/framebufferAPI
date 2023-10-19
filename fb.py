@@ -28,7 +28,7 @@ def writeBuffer(Bytes: bytes, position: int = 0) -> None:
     SYS_VIDEO_BUFFER.write(Bytes)
 
 def queueLocalChange(x: int, y: int, Bytes: bytes):
-    if 0 <= x < WIDTH and 0 <= y < HEIGHT:
+    if 0 <= x < WIDTH and 0 <= y < HEIGHT: # Doesn't write if negative or above screen size
         position = getPosition(x,y)
         LOCAL_QUEUE[position] = Bytes
         
@@ -72,7 +72,6 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
     for x in range(end_x-start_x):
         for i in range(thickness):
             y = round(m*(x+start_x+i)+c)
-            if y<0:y=0
             queueLocalChange(x,y,colour)
             queueLocalChange(x,y-(i*2),colour) # Nice :)
 
@@ -92,21 +91,8 @@ def debug() -> None:
     syncBuffers()
 
 
-def drawChessBoard() -> None:
-    x_value = 0
-    y_value = 0
-    shift = 0
-    tile_size = 50
-    for row in range(8):
-        for column in range(8):
-            drawSquare(tile_size,x_value,y_value,COLOURS["WHITE"] if (column+(shift%2))%2==0 else COLOURS["BLACK"])
-            x_value += tile_size
-        x_value=0
-        y_value+=tile_size
-        shift+=1
-    initTerminal()
-    updateLocalBuffer()
-    syncBuffers()
+def main():
+    pass
 
 if __name__ == "__main__":
-    drawChessBoard()
+    main()
