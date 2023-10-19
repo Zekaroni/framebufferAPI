@@ -76,7 +76,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
             queueLocalChange(x,y,colour)
             queueLocalChange(x,y-(i*2),colour) # Nice :)
 
-def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickness: int) -> None:
+def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickness: int = 3) -> None:
     """
     TODO: While this isn't too bad, find another way eventually
     """
