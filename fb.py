@@ -68,8 +68,12 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
     m = (end_y-start_y)/(end_x-start_x)
     c = (start_x*end_x-end_y*start_x)/(end_x-start_x)
     for x in range(end_x-start_x):
-        y = round(m*(x+start_x)+c)
-        queueLocalChange(x,y,colour)
+        for i in range(thickness):
+            y = round(m*(x+start_x+i)+c)
+            queueLocalChange(x,y,colour)
+            y = round(m*(x+start_x-i)+c)
+            queueLocalChange(x,y,colour)
+
 
 
 initTerminal()
