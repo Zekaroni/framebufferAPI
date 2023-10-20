@@ -28,9 +28,9 @@ def syncBuffers() -> None:
     SYS_VIDEO_BUFFER.write(LOCAL_BUFFER)
 
 def convertRGBtoBGRA(r:int, g:int, b:int) -> bytes:
-    b = b << (16)
+    r = r << (16)
     g = g << (8)
-    return (b + g + r).to_bytes(4,'little')
+    return (r + g + b).to_bytes(4,'little')
 
 
 im = Image.open("image.jpg")
