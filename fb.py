@@ -129,7 +129,7 @@ def debug() -> None:
     """
     For debugging
     """
-    initTerminal()
+    # initTerminal()
     drawSquare(100,0,0,COLOURS["RED"])
     drawSquare(100,100,0,COLOURS["GREEN"])
     drawSquare(400,200,0,COLOURS["BLUE"])
