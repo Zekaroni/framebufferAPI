@@ -37,8 +37,8 @@ im = Image.open("image.jpg")
 
 width, height = im.size
 px = im.load()
-for x in width:
-    for y in height:
+for x in range(width):
+    for y in range(height):
         queueLocalChange(x,y,convertRGBtoBGRA(*px[x,y]))
 updateLocalBuffer()
 syncBuffers()
