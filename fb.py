@@ -106,6 +106,18 @@ def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickne
             e -2*x-1
             x-=1
 
+
+def readImage(filePath: str):
+    if filePath.endswith(".zeke"):
+        try:
+            image = open(filePath, "rb")
+            writeBuffer(image)
+        except FileNotFoundError as e:
+            raise e
+        writeBuffer()
+    else:
+        raise TypeError("File format not supported")
+
 def debug() -> None:
     """
     For debugging
@@ -132,4 +144,4 @@ def drawTicTacToeBoard():
     updateFrameBuffer()
 
 if __name__ == "__main__":
-    debug()
+    readImage("image.zeke")
