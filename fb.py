@@ -12,8 +12,8 @@ COLOURS = {
     "PURPLE":      b'\xFF\x00\xFF\x00',
     "WHITE":       b'\xFF\xFF\xFF\x00',
     "BLACK":       b'\x00\x00\x00\x00',
+    "YELLOW"     : b'\x00\xFF\xFF\x00',
     "PASTEL_PINK": b'\xFC\xCF\xF6\x00',
-    "YELLOW"     : b'\x00\xFF\xFF\x00'
 }
 
 def getPosition(x: int, y: int):
