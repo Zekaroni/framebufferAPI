@@ -107,7 +107,8 @@ def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickne
             x-=1
 
 
-def readImage(filePath: str):
+def readImage(filePath:str, start_x:int =0, start_y:int =0) -> None:
+    # TODO: Add a way to add the image to a specific spot on the screen
     if filePath.endswith(".zeke"):
         try:
             image = open(filePath, "rb")
@@ -117,7 +118,7 @@ def readImage(filePath: str):
             cursor = 4
             for y in range(height):
                 for x in range(width):
-                    queueLocalChange(x,y,data[cursor:cursor+4])
+                    queueLocalChange(x+start_x,y+start_y,data[cursor:cursor+4])
                     cursor+=4
             updateFrameBuffer()
         except FileNotFoundError as e:
@@ -151,4 +152,4 @@ def drawTicTacToeBoard():
     updateFrameBuffer()
 
 if __name__ == "__main__":
-    readImage("image.zeke")
+    readImage("image.zeke",start_x=200,start_y=300)
