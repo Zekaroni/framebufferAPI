@@ -111,7 +111,7 @@ def readImage(filePath: str):
     if filePath.endswith(".zeke"):
         try:
             image = open(filePath, "rb")
-            writeBuffer(image)
+            writeBuffer(image.read())
         except FileNotFoundError as e:
             raise e
         writeBuffer()
