@@ -41,6 +41,6 @@ width, height = im.size
 px = im.load()
 for y in range(height):
     for x in range(width):
-        writePixel(x,y,convertRGBtoBGRA(*px[x,y]))
-# updateLocalBuffer()
-# syncBuffers()
+        queueLocalChange(x,y,convertRGBtoBGRA(*px[x,y]))
+updateLocalBuffer()
+syncBuffers()
