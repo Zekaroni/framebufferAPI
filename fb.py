@@ -12,7 +12,8 @@ COLOURS = {
     "PURPLE":      b'\xFF\x00\xFF\x00',
     "WHITE":       b'\xFF\xFF\xFF\x00',
     "BLACK":       b'\x00\x00\x00\x00',
-    "PASTEL_PINK": b'\xFC\xCF\xF6\x00'
+    "PASTEL_PINK": b'\xFC\xCF\xF6\x00',
+    "YELLOW"     : b'\x00\xFF\xFF\x00'
 }
 
 def getPosition(x: int, y: int):
@@ -114,7 +115,7 @@ def debug() -> None:
     drawSquare(100,100,0,COLOURS["GREEN"])
     drawSquare(400,200,0,COLOURS["BLUE"])
     drawSquare(200,0,100,COLOURS["PURPLE"])
-    drawRectangle(100,500,0,400,COLOURS["GREEN"])
+    drawRectangle(100,500,0,400,COLOURS["YELLOW"])
     drawLine(0,0,200,200,COLOURS["WHITE"])
     drawCircle(300,150,150,COLOURS["PASTEL_PINK"],thickness=3)
     updateFrameBuffer()
