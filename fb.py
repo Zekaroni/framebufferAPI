@@ -120,7 +120,6 @@ def readImage(filePath:str, start_x:int =0, start_y:int =0) -> None:
                 for x in range(width):
                     queueLocalChange(x+start_x,y+start_y,data[cursor:cursor+4])
                     cursor+=4
-            updateFrameBuffer()
         except FileNotFoundError as e:
             raise e
     else:
@@ -138,7 +137,6 @@ def debug() -> None:
     drawRectangle(400,200,1200,400,COLOURS["YELLOW"])
     drawLine(0,0,200,200,COLOURS["WHITE"])
     drawCircle(300,150,150,COLOURS["PASTEL_PINK"],thickness=3)
-    updateFrameBuffer()
 
 def drawTicTacToeBoard():
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
@@ -152,4 +150,6 @@ def drawTicTacToeBoard():
     updateFrameBuffer()
 
 if __name__ == "__main__":
+    debug()
     readImage("image.zeke",start_x=200,start_y=300)
+    updateFrameBuffer()
