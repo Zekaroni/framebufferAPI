@@ -121,7 +121,6 @@ def readImage(filePath: str):
                     cursor+=4
         except FileNotFoundError as e:
             raise e
-        writeBuffer()
     else:
         raise TypeError("File format not supported")
 
@@ -152,3 +151,4 @@ def drawTicTacToeBoard():
 
 if __name__ == "__main__":
     readImage("image.zeke")
+    updateFrameBuffer()
