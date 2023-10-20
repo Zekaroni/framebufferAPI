@@ -39,8 +39,8 @@ im = Image.open("image.jpg")
 
 width, height = im.size
 px = im.load()
-for x in range(width):
-    for y in range(height):
+for y in range(height):
+    for x in range(width):
         writePixel(x,y,convertRGBtoBGRA(*px[x,y]))
 # updateLocalBuffer()
 # syncBuffers()
