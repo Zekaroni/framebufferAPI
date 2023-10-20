@@ -111,7 +111,14 @@ def readImage(filePath: str):
     if filePath.endswith(".zeke"):
         try:
             image = open(filePath, "rb")
-            writeBuffer(image.read())
+            data = bytearray(image.read())
+            width = int.from_bytes(data[0:2], byteorder='little')
+            height = int.from_bytes(data[2:4], byteorder='little')
+            cursor = 4
+            for y in range(height):
+                for x in range(width):
+                    queueLocalChange(x,y,data[cursor:cursor+4])
+                    cursor+=4
         except FileNotFoundError as e:
             raise e
         writeBuffer()
