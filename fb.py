@@ -119,6 +119,7 @@ def readImage(filePath: str):
                 for x in range(width):
                     queueLocalChange(x,y,data[cursor:cursor+4])
                     cursor+=4
+            updateFrameBuffer()
         except FileNotFoundError as e:
             raise e
     else:
@@ -151,4 +152,3 @@ def drawTicTacToeBoard():
 
 if __name__ == "__main__":
     readImage("image.zeke")
-    updateFrameBuffer()
