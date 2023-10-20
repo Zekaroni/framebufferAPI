@@ -13,7 +13,6 @@ outputFile = open("image.zeke", "wb")
 width, height = im.size
 b_width = width.to_bytes(2,'little')
 b_height = height.to_bytes(2,'little')
-print(int(b_height))
 outputFile.write(b_width)
 outputFile.write(b_height)
 px = im.load()
