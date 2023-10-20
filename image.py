@@ -7,9 +7,11 @@ SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 LOCAL_BUFFER = SYS_VIDEO_BUFFER.read()
 LOCAL_QUEUE = {}
 
-def writeBuffer(Bytes: bytes, position: int = 0) -> None:
-    SYS_VIDEO_BUFFER.seek(position)
-    SYS_VIDEO_BUFFER.write(Bytes)
+def writePixel(x: int, y: int, Bytes: bytes):
+    if 0 <= x < WIDTH and 0 <= y < HEIGHT:
+        position = (y * WIDTH + x) * BYTES_PER_PIXEL
+        SYS_VIDEO_BUFFER.seek(position)
+        SYS_VIDEO_BUFFER.write(Bytes)
 
 def queueLocalChange(x: int, y: int, Bytes: bytes):
     if 0 <= x < WIDTH and 0 <= y < HEIGHT: # Doesn't write if negative or above screen size
@@ -39,6 +41,6 @@ width, height = im.size
 px = im.load()
 for x in range(width):
     for y in range(height):
-        queueLocalChange(x,y,convertRGBtoBGRA(*px[x,y]))
-updateLocalBuffer()
-syncBuffers()
+        writePixel(x,y,convertRGBtoBGRA(*px[x,y]))
+# updateLocalBuffer()
+# syncBuffers()
