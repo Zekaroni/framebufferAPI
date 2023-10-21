@@ -164,20 +164,23 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
         .66,
         1
     ]
-    cross_padding = 10
+    axis_offsets = [
+        1/12,
+        1/4,
+    ]
     cross_lookup = [
         [
             [
-                x_offset+cross_padding, # = 10
-                y_offset+cross_padding, # = 10
-                x_offset+round(board_size*midpoint_offset[0])-cross_padding, # = 155
-                y_offset+round(board_size*midpoint_offset[0])-cross_padding  # = 155
+                x_offset*axis_offsets[0], # = 10
+                y_offset+axis_offsets[0], # = 10
+                x_offset+round(board_size*midpoint_offset[0])*axis_offsets[1], # = 155
+                y_offset+round(board_size*midpoint_offset[0])*axis_offsets[1]  # = 155
             ],
             [
-                x_offset+cross_padding, # = 10
-                y_offset+round(board_size*midpoint_offset[0])-cross_padding, # = 155
-                x_offset+round(board_size*midpoint_offset[0])-cross_padding, # = 155
-                y_offset+cross_padding, # = 10
+                x_offset*axis_offsets[0], # = 10
+                y_offset+round(board_size*midpoint_offset[0])*axis_offsets[1], # = 155
+                x_offset+round(board_size*midpoint_offset[0])*axis_offsets[1], # = 155
+                y_offset*axis_offsets[0], # = 10
             ]
         ],
     ]
@@ -193,7 +196,6 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     
     def x(index: int) -> None:
         for line in cross_lookup[index]:
-            print(line)
             start_x, start_y, end_x, end_y = line
             drawLine(start_x,start_y,end_x,end_y,COLOURS["WHITE"])
 
