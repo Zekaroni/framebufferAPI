@@ -140,16 +140,14 @@ def debug() -> None:
 
 def drawTicTacToeBoard():
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
-    # board_size = 0
-    # line_thickness = 5
-
-    initTerminal()
-    drawRectangle(150,200,160,500,COLOURS["WHITE"])
-    drawRectangle(250,200,260,500,COLOURS["WHITE"])
-    drawRectangle(100,250,350,260,COLOURS["WHITE"])
+    board_size = 500
+    line_thickness = 5
+    
+    for i in [0.33,0.66]:
+        start_X = board_size * i
+        drawRectangle(start_X,start_X+line_thickness,board_size, board_size+line_thickness)
+        pass
     updateFrameBuffer()
 
 if __name__ == "__main__":
-    debug()
-    readImage("image.zeke",start_x=200,start_y=300)
-    updateFrameBuffer()
+    drawTicTacToeBoard()
