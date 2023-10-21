@@ -138,7 +138,7 @@ def debug() -> None:
     drawLine(0,0,200,200,COLOURS["WHITE"])
     drawCircle(300,150,150,COLOURS["PASTEL_PINK"],thickness=3)
 
-def drawTicTacToeBoard():
+def drawTicTacToeBoard(x_offset: int, y_offset: int) -> None:
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
     initTerminal()
     board_size = 500
@@ -150,26 +150,37 @@ def drawTicTacToeBoard():
         5/6
     ]
 
+    midpoint_offset = [
+        .33,
+        .66,
+        1
+    ]
+    
+    cross_lookup = [
+        [[x_offset, y_offset,x_offset+round(board_size*i),y_offset+round(board_size*i)]]
+    ]
+
     circle_lookup = [
             [0,0], [1,0], [2,0],
             [0,1], [1,1], [2,1],
             [0,2], [1,2], [2,2]
-        ]
+    ]
     def o(index: int) -> None:
         x, y = [round(board_size * line_offset[i]) for i in circle_lookup[index]]
         drawCircle(x,y,20,COLOURS["WHITE"])
     
-    def x():
-
-        pass
+    def x(index: int) -> None:
+        start_x, start_y, end_x, end_y = cross_lookup[index][0]
+        drawLine(start_x,start_y,end_x,end_y,COLOURS["WHITE"])
 
     for i in [0.33,0.66]:
         offset = round(board_size * i)
         drawRectangle(0,offset,board_size, offset+line_thickness, COLOURS["WHITE"])
         drawRectangle(offset,0,offset+line_thickness,board_size,COLOURS["WHITE"])
-    for i in range(4):
-        o(i)
 
+    for i in range(1,4):
+        o(i)
+    x(0)
     updateFrameBuffer()
 
 if __name__ == "__main__":
