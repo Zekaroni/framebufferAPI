@@ -1,5 +1,13 @@
-WIDTH = 1280
-HEIGHT = 800
+with open('/sys/class/graphics/fb0/virtual_size') as size_file:
+    WIDTH, HEIGHT = size_file.read().split(',')
+size_file.close()
+del size_file
+
+with open('/sys/class/graphics/fb0/bits_per_pixel') as bits_file:
+    BYTES_PER_PIXEL = int(size_file.read()) // 8
+bits_file.close()
+del bits_file
+
 BYTES_PER_PIXEL = 4
 SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 LOCAL_BUFFER = SYS_VIDEO_BUFFER.read()
