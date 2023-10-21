@@ -90,6 +90,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
         end_y = tmp
         swap = True
 
+    print(swap)
     slope = (end_y - start_y) / (end_x - start_x)
     c = start_y - slope * start_x
     for x in range(start_x, end_x + 1):
@@ -158,7 +159,7 @@ def debug() -> None:
 
 def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
-    initTerminal()
+    # initTerminal()
     board_size = 500
     line_thickness = 5
     line_offset = [
@@ -221,7 +222,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     drawLine(500,500,750,750,COLOURS["BLUE"])
     drawLine(183,183,400,400,COLOURS['PURPLE'])
     x(0,colour=COLOURS["RED"])
-    updateFrameBuffer()
+    # updateFrameBuffer()
 
 if __name__ == "__main__":
     drawTicTacToeBoard(x_offset=500)
