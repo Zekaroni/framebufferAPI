@@ -144,9 +144,10 @@ def drawTicTacToeBoard():
     line_thickness = 5
     
     for i in [0.33,0.66]:
-        start_y = round(board_size * i)
-        drawRectangle(0,start_y,board_size, start_y+line_thickness, COLOURS["WHITE"])
-        pass
+        offset = round(board_size * i)
+        drawRectangle(0,offset,board_size, offset+line_thickness, COLOURS["WHITE"])
+        drawRectangle(offset,0,offset+line_thickness,board_size,COLOURS["WHITE"])
+
     updateFrameBuffer()
 
 if __name__ == "__main__":
