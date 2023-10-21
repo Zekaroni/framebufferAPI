@@ -1,5 +1,5 @@
 with open('/sys/class/graphics/fb0/virtual_size') as size_file:
-    WIDTH, HEIGHT = size_file.read().split(',')
+    WIDTH, HEIGHT = [int(i) for i in size_file.read().split(',')]
 size_file.close()
 del size_file
 
