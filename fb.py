@@ -209,6 +209,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     
     x(0)
     drawRectangle(0,0,14,14,COLOURS["YELLOW"])
+    drawRectangle(124,124,165,165,COLOURS["YELLOW"])
     updateFrameBuffer()
 
 if __name__ == "__main__":
