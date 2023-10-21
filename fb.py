@@ -72,16 +72,22 @@ def drawRectangle(start_x: int, start_y: int, end_x: int, end_y: int, colour: by
             queueLocalChange(i, j, colour)
 
 def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 1) -> None:
-    slope = (end_y-start_y)/(end_x-start_x)
-    c = (start_x*end_x-end_y*start_x)/abs(end_x-start_x)
-    length = end_x-start_x
-    for x in (range(length) if length > 0 else range(-length, 0, -1)):
+    # Check if the line goes from right to left and swap points if needed
+    if start_x > end_x:
+        start_x, end_x = end_x, start_x
+        start_y, end_y = end_y, start_y
+
+    slope = (end_y - start_y) / (end_x - start_x)
+    intercept = start_y - slope * start_x
+    length = end_x - start_x
+
+    for x in range(start_x, end_x + 1):
         for i in range(thickness):
-            # TODO: Fix thickness for x axis
-            y = round(slope*(x+start_x+i)+c)
-            print(x,y)
-            queueLocalChange(x,y,colour)
-            queueLocalChange(x,y-(i*2),colour) # Nice :)
+            y = round(slope * x + intercept)
+            print(x, y)
+            queueLocalChange(x, y, colour)
+            queueLocalChange(x, y - (i * 2), colour)  # Adjust for thickness
+
 
 def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickness: int = 3) -> None:
     """
