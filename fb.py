@@ -140,6 +140,7 @@ def debug() -> None:
 
 def drawTicTacToeBoard():
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
+    initTerminal()
     board_size = 500
     line_thickness = 5
     
