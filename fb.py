@@ -64,7 +64,7 @@ def clearFrameBuffer(Bytes: bytes = b'\x00\x00\x00\x00') -> None:
 
 def initTerminal() -> None:
     print("\x1b[2J\x1b[H",end="")
-    clearFrameBuffer()
+    clearFrameBuffer(COLOURS["PASTEL_PINK"])
     print("\n"*(HEIGHT//14))
 
 def drawSquare(size: int, start_x: int, start_y: int, colour: bytes) -> None:
@@ -92,7 +92,6 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
 
     slope = (end_y - start_y) / (end_x - start_x)
     c = start_y - slope * start_x
-    print(c)
     for x in range(start_x, end_x + 1):
         for i in range(thickness+1):
             y = round(slope * (x+i) + (c if not swap else 0))
