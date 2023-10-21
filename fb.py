@@ -194,10 +194,10 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
         x, y = [round(board_size * line_offset[i]) for i in circle_lookup[index]]
         drawCircle(x,y,round(board_size/10),COLOURS["WHITE"])
     
-    def x(index: int) -> None:
+    def x(index: int, colour: bytes = COLOURS["WHITE"]) -> None:
         for line in cross_lookup[index]:
             start_x, start_y, end_x, end_y = line
-            drawLine(start_x,start_y,end_x,end_y,COLOURS["WHITE"])
+            drawLine(start_x,start_y,end_x,end_y,colour)
 
     for i in [0.33,0.66]:
         offset = round(board_size * i)
@@ -209,7 +209,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     
     drawRectangle(0,0,round(section_size*0.25),round(section_size*0.25),COLOURS["YELLOW"])
     drawRectangle(section_size-round(section_size*0.25),section_size-round(section_size*0.25),165,165,COLOURS["YELLOW"])
-    x(0)
+    x(0,colour=COLOURS["RED"])
     updateFrameBuffer()
 
 if __name__ == "__main__":
