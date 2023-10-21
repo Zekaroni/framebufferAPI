@@ -157,7 +157,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     ]
     
     cross_lookup = [
-        [[x_offset, y_offset,x_offset+round(board_size*i),y_offset+round(board_size*i)]]
+        [[x_offset, y_offset,x_offset+round(board_size*midpoint_offset[0]),y_offset+round(board_size*midpoint_offset[0])]]
     ]
 
     circle_lookup = [
@@ -180,6 +180,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
 
     for i in range(1,4):
         o(i)
+    
     x(0)
     updateFrameBuffer()
 
