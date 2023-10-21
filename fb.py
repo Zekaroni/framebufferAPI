@@ -4,7 +4,7 @@ size_file.close()
 del size_file
 
 with open('/sys/class/graphics/fb0/bits_per_pixel') as bits_file:
-    BYTES_PER_PIXEL = int(size_file.read()) // 8
+    BYTES_PER_PIXEL = int(bits_file.read()) // 8
 bits_file.close()
 del bits_file
 
