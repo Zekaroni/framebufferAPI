@@ -157,7 +157,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     ]
     
     cross_lookup = [
-        [[x_offset, y_offset,x_offset+round(board_size*midpoint_offset[0]),y_offset+round(board_size*midpoint_offset[0])]]
+        [[x_offset, y_offset,x_offset+round(board_size*-midpoint_offset[0]),y_offset+round(board_size*-midpoint_offset[0])]]
     ]
 
     circle_lookup = [
@@ -165,6 +165,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
             [0,1], [1,1], [2,1],
             [0,2], [1,2], [2,2]
     ]
+
     def o(index: int) -> None:
         x, y = [round(board_size * line_offset[i]) for i in circle_lookup[index]]
         drawCircle(x,y,20,COLOURS["WHITE"])
