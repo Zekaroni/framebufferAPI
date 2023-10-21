@@ -144,7 +144,7 @@ def drawTicTacToeBoard():
     board_size = 500
     line_thickness = 5
     
-    offset = [
+    line_offset = [
         1/6,
         1/2,
         5/6
@@ -157,11 +157,7 @@ def drawTicTacToeBoard():
     ]
 
     def o(index: int) -> None:
-        values = []
-        print(circle_lookup[index])
-        for i in circle_lookup[index]:
-            values.append(round(board_size * offset[i]))
-        x, y = values
+        x, y = [round(board_size * line_offset[i]) for i in circle_lookup[index]]
         drawCircle(x,y,20,COLOURS["WHITE"])
     
     def x():
