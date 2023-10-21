@@ -76,7 +76,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
         start_x, end_x = end_x, start_x
         start_y, end_y = end_y, start_y
     slope = (end_y - start_y) / (end_x - start_x)
-    intercept = (start_x*end_x-end_y*start_x)/(end_x-start_x)
+    intercept = start_y - slope * start_x
     for x in range(start_x, end_x + 1):
         for i in range(thickness):
             y = round(slope * (x+start_x+i) + intercept)
