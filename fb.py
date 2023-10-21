@@ -138,7 +138,7 @@ def debug() -> None:
     drawLine(0,0,200,200,COLOURS["WHITE"])
     drawCircle(300,150,150,COLOURS["PASTEL_PINK"],thickness=3)
 
-def drawTicTacToeBoard(x_offset: int, y_offset: int) -> None:
+def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
     initTerminal()
     board_size = 500
