@@ -81,7 +81,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
         for i in range(thickness):
             y = round(slope * (x+start_x+i) + intercept)
             queueLocalChange(x, y, colour)
-            queueLocalChange(x, y - (i * 2), colour)
+            queueLocalChange(x, y - thickness, colour)
 
 
 def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickness: int = 3) -> None:
