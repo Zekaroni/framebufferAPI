@@ -154,12 +154,13 @@ def drawTicTacToeBoard():
             [0,0], [0,1], [0,2],
             [1,0], [1,1], [1,2],
             [2,0], [2,1], [2,2]
-        ]
+    ]
 
     def o(index: int) -> None:
         values = []
-        for _ in circle_lookup[index]:
-            values.append(round(board_size * offset[_]))
+        print(circle_lookup[index])
+        for i in circle_lookup[index]:
+            values.append(round(board_size * offset[i]))
         x, y = values
         drawCircle(x,y,20,COLOURS["WHITE"])
     
