@@ -74,14 +74,10 @@ def drawRectangle(start_x: int, start_y: int, end_x: int, end_y: int, colour: by
 def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 3) -> None:
     slope = (end_y-start_y)/(end_x-start_x)
     c = (start_x*end_x-end_y*start_x)/(end_x-start_x)
-    line_range = end_x-start_x
-    for x in range(abs(end_x-start_x)):
-        if line_range < 0:
-            x = -x
+    for x in range(end_x-start_x):
         for i in range(thickness):
             # TODO: Fix thickness for x axis
             y = round(slope*(x+start_x+i)+c)
-            print(x,y)
             queueLocalChange(x,y,colour)
             queueLocalChange(x,y-(i*2),colour) # Nice :)
 
@@ -169,10 +165,10 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
                 y_offset+round(board_size*midpoint_offset[0])
             ],
             [
+                x_offset,
+                y_offset+round(board_size*midpoint_offset[0]),
                 x_offset+round(board_size*midpoint_offset[0]),
                 y_offset,
-                x_offset,
-                y_offset+round(board_size*midpoint_offset[0])
             ]
         ],
     ]
