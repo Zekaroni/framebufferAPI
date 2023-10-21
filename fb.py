@@ -167,19 +167,20 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
         1/12,
         1/4,
     ]
+    cross_padding = 10
     cross_lookup = [
         [
             [
-                x_offset+round(section_size*axis_offsets[0]),
-                y_offset,
-                x_offset+round(board_size*midpoint_offset[0])-round(section_size*axis_offsets[1]),
-                y_offset+round(board_size*midpoint_offset[0])-round(section_size*axis_offsets[1])
+                x_offset+cross_padding, # = 10
+                y_offset+cross_padding, # = 10
+                x_offset+round(board_size*midpoint_offset[0])-cross_padding, # = 155
+                y_offset+round(board_size*midpoint_offset[0])-cross_padding  # = 155
             ],
             [
-                x_offset+round(section_size*axis_offsets[0]),
-                y_offset+round(board_size*midpoint_offset[0])-round(section_size*axis_offsets[1]),
-                x_offset+round(board_size*midpoint_offset[0])-round(section_size*axis_offsets[0]),
-                y_offset+round(section_size*axis_offsets[1]),
+                x_offset+cross_padding, # = 10
+                y_offset+round(board_size*midpoint_offset[0])-cross_padding, # = 155
+                x_offset+round(board_size*midpoint_offset[0])-cross_padding, # = 155
+                y_offset+cross_padding, # = 10
             ]
         ],
     ]
@@ -210,7 +211,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     drawRectangle(section_size-round(section_size*0.25),section_size-round(section_size*0.25),165,165,COLOURS["YELLOW"])
     drawRectangle(500,500,750,750,COLOURS["WHITE"])
     drawLine(500,500,750,750,COLOURS["BLUE"])
-    drawLine(121,121,400,400,COLOURS['PURPLE'])
+    drawLine(183,183,400,400,COLOURS['PURPLE'])
     x(0,colour=COLOURS["RED"])
     updateFrameBuffer()
 
