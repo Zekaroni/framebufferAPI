@@ -165,8 +165,8 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
         1
     ]
     axis_offsets = [
-        1/12,
-        1/4,
+        1/3,
+        2/3,
     ]
     cross_lookup = [
         [
