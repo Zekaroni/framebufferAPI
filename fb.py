@@ -185,6 +185,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     
     def x(index: int) -> None:
         for line in cross_lookup[index]:
+            print(line)
             start_x, start_y, end_x, end_y = line
             drawLine(start_x,start_y,end_x,end_y,COLOURS["WHITE"])
 
