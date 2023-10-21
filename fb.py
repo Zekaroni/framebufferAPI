@@ -155,8 +155,6 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     line_thickness = 5
     token_size = 10
 
-    tile_size = round(board_size/3)
-
     index_midpoints = [
         [round(board_size/6), round(board_size/6)], [round(board_size/2),round(board_size/6)], [round(board_size*5/6),round(board_size/6)],
         [round(board_size/6), round(board_size/2)], [round(board_size/2),round(board_size/2)], [round(board_size*5/6),round(board_size/2)],
