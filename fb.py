@@ -1,6 +1,5 @@
 with open('/sys/class/graphics/fb0/virtual_size') as size_file:
     WIDTH, HEIGHT = [int(i) for i in size_file.read().split(',')]
-    WIDTH+=10 # On my laptop there seems to be 40 bytes (10 pixels worth) of extra data that is not there
 size_file.close()
 del size_file
 
