@@ -94,7 +94,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
     c = start_y - slope * start_x
     for x in range(start_x, end_x + 1):
         for i in range(thickness+1):
-            y = round(slope * (x+i) + (c if not swap else 0))
+            y = round(slope * (x) + (c if not swap else i))
             queueLocalChange(x, (y-1 if not swap else y), colour)
             queueLocalChange(x, y - (i * 2), colour)
 
@@ -218,8 +218,8 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     # drawRectangle(0,0,round(section_size*0.25),round(section_size*0.25),COLOURS["YELLOW"])
     # drawRectangle(section_size-round(section_size*0.25),section_size-round(section_size*0.25),165,165,COLOURS["YELLOW"])
     # drawRectangle(500,500,750,750,COLOURS["WHITE"])
-    # drawLine(500,500,750,750,COLOURS["BLUE"])
-    # drawLine(183,183,400,400,COLOURS['PURPLE'])
+    drawLine(500,500,750,750,COLOURS["BLUE"])
+    drawLine(183,183,400,400,COLOURS['PURPLE'])
     x(0,colour=COLOURS["RED"])
     updateFrameBuffer()
 
