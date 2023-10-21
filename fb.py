@@ -144,10 +144,32 @@ def drawTicTacToeBoard():
     board_size = 500
     line_thickness = 5
     
+    offset = [
+        1/6,
+        1/2,
+        5/6
+    ]
+
+    circle_lookup = [
+            [0,0], [0,1], [0,2],
+            [1,0], [1,1], [1,2],
+            [2,0], [2,1], [2,2]
+        ]
+
+    def o(index: int) -> None:
+        x, y = [board_size * offset[i] for i in circle_lookup[index]]
+        drawCircle(x,y,20,COLOURS["WHITE"])
+    
+    def x():
+
+        pass
+
     for i in [0.33,0.66]:
         offset = round(board_size * i)
         drawRectangle(0,offset,board_size, offset+line_thickness, COLOURS["WHITE"])
         drawRectangle(offset,0,offset+line_thickness,board_size,COLOURS["WHITE"])
+
+    o(2)
 
     updateFrameBuffer()
 
