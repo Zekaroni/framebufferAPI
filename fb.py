@@ -94,7 +94,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
     c = start_y - slope * start_x
     for x in range(start_x, end_x + 1):
         for i in range(thickness+1):
-            y = round(slope * (x) + (c if not swap else i))
+            y = round(slope * (x+i) + (i-c if not swap else 0))
             queueLocalChange(x, (y-1 if not swap else y), colour)
             queueLocalChange(x, y - (i * 2), colour)
 
