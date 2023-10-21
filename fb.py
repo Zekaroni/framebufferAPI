@@ -80,8 +80,12 @@ def drawRectangle(start_x: int, start_y: int, end_x: int, end_y: int, colour: by
 
 def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 3) -> None:
     if start_x > end_x:
-        start_x, end_x = end_x, start_x
-        start_y, end_y = end_y, start_y
+        tmp = start_x
+        start_x = end_x
+        end_x = tmp
+        tmp = start_y
+        start_y = end_y
+        end_y = tmp
     slope = (end_y - start_y) / (end_x - start_x)
     for x in range(start_x, end_x + 1):
         for i in range(thickness+1):
