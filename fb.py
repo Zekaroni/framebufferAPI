@@ -64,7 +64,7 @@ def clearFrameBuffer(Bytes: bytes = b'\x00\x00\x00\x00') -> None:
 
 def initTerminal() -> None:
     print("\x1b[2J\x1b[H",end="")
-    clearFrameBuffer(COLOURS["PASTEL_PINK"])
+    clearFrameBuffer()
     print("\n"*(HEIGHT//14))
 
 def drawSquare(size: int, start_x: int, start_y: int, colour: bytes) -> None:
