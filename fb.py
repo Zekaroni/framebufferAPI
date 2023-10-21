@@ -79,20 +79,22 @@ def drawRectangle(start_x: int, start_y: int, end_x: int, end_y: int, colour: by
             queueLocalChange(i, j, colour)
 
 def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 3) -> None:
-    # if start_x > end_x:
-    #     tmp = start_x
-    #     start_x = end_x
-    #     end_x = tmp
+    swap = False
+    if start_y > end_y:
+        tmp = start_x
+        start_x = end_x
+        end_x = tmp
 
-    #     tmp = start_y
-    #     start_y = end_y
-    #     end_y = tmp
+        tmp = start_y
+        start_y = end_y
+        end_y = tmp
+        swap = True
 
     slope = (end_y - start_y) / (end_x - start_x)
     c = start_y - slope * start_x
     for x in range(start_x, end_x + 1):
         for i in range(thickness+1):
-            y = round(slope * (x+i) + c)
+            y = round(slope * (x+i) + (c if not swap else 0))
             queueLocalChange(x, y, colour)
             queueLocalChange(x, y - (i * 2), colour)
 
@@ -145,7 +147,7 @@ def debug() -> None:
     """
     For debugging
     """
-    initTerminal()
+    # initTerminal()
     drawSquare(100,0,0,COLOURS["RED"])
     drawSquare(100,100,0,COLOURS["GREEN"])
     drawSquare(400,200,0,COLOURS["BLUE"])
@@ -219,7 +221,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     drawLine(500,500,750,750,COLOURS["BLUE"])
     drawLine(183,183,400,400,COLOURS['PURPLE'])
     x(0,colour=COLOURS["RED"])
-    updateFrameBuffer()
+    # updateFrameBuffer()
 
 if __name__ == "__main__":
-    drawTicTacToeBoard(x_offset=0)
+    drawTicTacToeBoard(x_offset=500)
