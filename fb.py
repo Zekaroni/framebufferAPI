@@ -178,7 +178,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
             ],
             [
                 x_offset+round(section_size*axis_offsets[0]),
-                y_offset+round(board_size*midpoint_offset[0])-round(section_size*axis_offsets[1]),
+                y_offset+round(board_size*midpoint_offset[0])+round(section_size*axis_offsets[1]),
                 x_offset+round(board_size*midpoint_offset[0])-round(section_size*axis_offsets[1]),
                 y_offset+round(section_size*axis_offsets[0]),
             ]
