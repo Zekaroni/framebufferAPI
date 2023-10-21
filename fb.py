@@ -76,6 +76,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
     c = (start_x*end_x-end_y*start_x)/(end_x-start_x)
     print(end_x-start_x)
     for x in range(end_x-start_x):
+        print(x)
         for i in range(thickness):
             # TODO: Fix thickness for x axis
             y = round(slope*(x+start_x+i)+c)
