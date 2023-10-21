@@ -8,7 +8,6 @@ with open('/sys/class/graphics/fb0/bits_per_pixel') as bits_file:
 bits_file.close()
 del bits_file
 
-BYTES_PER_PIXEL = 4
 SYS_VIDEO_BUFFER = open("/dev/fb0","r+b")
 LOCAL_BUFFER = SYS_VIDEO_BUFFER.read()
 LOCAL_QUEUE = {}
