@@ -145,7 +145,7 @@ def debug() -> None:
     """
     For debugging
     """
-    # initTerminal()
+    initTerminal()
     drawSquare(100,0,0,COLOURS["RED"])
     drawSquare(100,100,0,COLOURS["GREEN"])
     drawSquare(400,200,0,COLOURS["BLUE"])
@@ -219,7 +219,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     drawLine(500,500,750,750,COLOURS["BLUE"])
     drawLine(183,183,400,400,COLOURS['PURPLE'])
     x(0,colour=COLOURS["RED"])
-    # updateFrameBuffer()
+    updateFrameBuffer()
 
 if __name__ == "__main__":
-    drawTicTacToeBoard(x_offset=500)
+    drawTicTacToeBoard(x_offset=0)
