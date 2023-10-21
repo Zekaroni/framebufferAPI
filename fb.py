@@ -164,19 +164,20 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
         .66,
         1
     ]
+    cross_padding = 10
     cross_lookup = [
         [
             [
-                x_offset,
-                y_offset,
-                x_offset+round(board_size*midpoint_offset[0]),
-                y_offset+round(board_size*midpoint_offset[0])
+                x_offset+cross_padding,
+                y_offset+cross_padding,
+                x_offset+round(board_size*midpoint_offset[0])-cross_padding,
+                y_offset+round(board_size*midpoint_offset[0])-cross_padding
             ],
             [
-                x_offset,
-                y_offset+round(board_size*midpoint_offset[0]),
-                x_offset+round(board_size*midpoint_offset[0]),
-                y_offset,
+                x_offset+cross_padding,
+                y_offset+round(board_size*midpoint_offset[0])+cross_padding,
+                x_offset+round(board_size*midpoint_offset[0])-cross_padding,
+                y_offset-cross_padding,
             ]
         ],
     ]
