@@ -81,6 +81,7 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
         for i in range(thickness):
             # TODO: Fix thickness for x axis
             y = round(slope*(x+start_x+i)+c)
+            print(x,y)
             queueLocalChange(x,y,colour)
             queueLocalChange(x,y-(i*2),colour) # Nice :)
 
