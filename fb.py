@@ -144,10 +144,9 @@ def debug() -> None:
 
 def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
-    # initTerminal()
+    initTerminal()
     board_size = 500
     line_thickness = 5
-    
     line_offset = [
         1/6,
         1/2,
@@ -159,7 +158,6 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
         .66,
         1
     ]
-    
     cross_lookup = [
         [
             [
@@ -176,7 +174,6 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
             ]
         ],
     ]
-
     circle_lookup = [
             [0,0], [1,0], [2,0],
             [0,1], [1,1], [2,1],
