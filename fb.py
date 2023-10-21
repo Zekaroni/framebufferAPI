@@ -74,8 +74,8 @@ def drawRectangle(start_x: int, start_y: int, end_x: int, end_y: int, colour: by
 def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 1) -> None:
     slope = (end_y-start_y)/(end_x-start_x)
     c = (start_x*end_x-end_y*start_x)/(end_x-start_x)
-    print(end_x-start_x)
-    for x in range(end_x-start_x):
+    length = end_x-start_x
+    for x in (range(length) if length > 0 else range(length, 0)):
         print(x)
         for i in range(thickness):
             # TODO: Fix thickness for x axis
