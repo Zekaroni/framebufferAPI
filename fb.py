@@ -203,6 +203,6 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     updateFrameBuffer()
 
 if __name__ == "__main__":
-    initTerminal()
+    # initTerminal()
     drawLine(10,0,0,10,COLOURS["RED"])
     updateFrameBuffer()
