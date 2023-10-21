@@ -199,7 +199,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
         o(i)
     
     x(0)
-    # updateFrameBuffer()
+    updateFrameBuffer()
 
 if __name__ == "__main__":
     drawTicTacToeBoard()
