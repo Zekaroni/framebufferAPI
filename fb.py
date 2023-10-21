@@ -203,5 +203,5 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
 
 if __name__ == "__main__":
     # initTerminal()
-    drawLine(10,0,0,10,COLOURS["RED"])
+    drawLine(50,0,0,50,COLOURS["RED"])
     updateFrameBuffer()
