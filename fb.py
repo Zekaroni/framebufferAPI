@@ -147,7 +147,7 @@ def debug() -> None:
     """
     For debugging
     """
-    # initTerminal()
+    initTerminal()
     drawSquare(100,0,0,COLOURS["RED"])
     drawSquare(100,100,0,COLOURS["GREEN"])
     drawSquare(400,200,0,COLOURS["BLUE"])
@@ -158,7 +158,7 @@ def debug() -> None:
 
 def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
-    # initTerminal()
+    initTerminal()
     board_size = 500
     line_thickness = 5
     line_offset = [
@@ -218,10 +218,10 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     # drawRectangle(0,0,round(section_size*0.25),round(section_size*0.25),COLOURS["YELLOW"])
     # drawRectangle(section_size-round(section_size*0.25),section_size-round(section_size*0.25),165,165,COLOURS["YELLOW"])
     # drawRectangle(500,500,750,750,COLOURS["WHITE"])
-    drawLine(500,500,750,750,COLOURS["BLUE"])
-    drawLine(183,183,400,400,COLOURS['PURPLE'])
+    # drawLine(500,500,750,750,COLOURS["BLUE"])
+    # drawLine(183,183,400,400,COLOURS['PURPLE'])
     x(0,colour=COLOURS["RED"])
-    # updateFrameBuffer()
+    updateFrameBuffer()
 
 if __name__ == "__main__":
-    drawTicTacToeBoard(x_offset=500)
+    drawTicTacToeBoard(x_offset=0)
