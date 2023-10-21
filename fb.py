@@ -79,6 +79,7 @@ def drawRectangle(start_x: int, start_y: int, end_x: int, end_y: int, colour: by
             queueLocalChange(i, j, colour)
 
 def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, thickness: int = 3) -> None:
+    swap = False
     if start_x > end_x:
         tmp = start_x
         start_x = end_x
@@ -87,12 +88,13 @@ def drawLine(start_x: int, start_y: int, end_x: int, end_y: int, colour: bytes, 
         tmp = start_y
         start_y = end_y
         end_y = tmp
-        
+        swap = True
+
     slope = (end_y - start_y) / (end_x - start_x)
     c = start_y - slope * start_x
     for x in range(start_x, end_x + 1):
         for i in range(thickness+1):
-            y = round(slope * (x+i) + c)
+            y = round(slope * (x+i) + (c if swap else 0))
             queueLocalChange(x, y, colour)
             queueLocalChange(x, y - (i * 2), colour)
 
