@@ -208,8 +208,8 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
         o(i)
     
     x(0)
-    drawRectangle(0,0,14,14,COLOURS["YELLOW"])
-    drawRectangle(124,124,165,165,COLOURS["YELLOW"])
+    drawRectangle(0,0,55,55,COLOURS["YELLOW"])
+    drawRectangle(110,110,165,165,COLOURS["YELLOW"])
     updateFrameBuffer()
 
 if __name__ == "__main__":
