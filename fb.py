@@ -1,5 +1,6 @@
 with open('/sys/class/graphics/fb0/virtual_size') as size_file:
     WIDTH, HEIGHT = [int(i) for i in size_file.read().split(',')]
+    WIDTH+=10 # On my laptop there seems to be 40 bytes (10 pixels worth) of extra data that is not there
 size_file.close()
 del size_file
 
@@ -42,17 +43,19 @@ def queueLocalChange(x: int, y: int, Bytes: bytes):
         LOCAL_QUEUE[position] = Bytes
         
 def updateLocalBuffer() -> None:
-    global LOCAL_BUFFER
+    global LOCAL_BUFFER, LOCAL_QUEUE
     buffer_list = bytearray(LOCAL_BUFFER)
     for position in LOCAL_QUEUE:
         buffer_list[position:position+BYTES_PER_PIXEL] = LOCAL_QUEUE[position]
     LOCAL_BUFFER = bytes(buffer_list)
+    LOCAL_QUEUE = {}
 
 def syncBuffers() -> None:
     SYS_VIDEO_BUFFER.seek(0)
     SYS_VIDEO_BUFFER.write(LOCAL_BUFFER)
 
 def updateFrameBuffer() -> None:
+    global LOCAL_BUFFER
     updateLocalBuffer()
     syncBuffers()
 
@@ -148,69 +151,38 @@ def debug() -> None:
 def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
     initTerminal()
-    board_size = 500
+    board_size = 600
     line_thickness = 5
-    line_offset = [
-        1/6,
-        1/2,
-        5/6
-    ]
-    midpoint_offset = [
-        .33,
-        .66,
-        1
-    ]
-    section_size = round(board_size/3)
-    axis_offsets = [
-        1/12,
-        1/4,
-    ]
-    cross_padding = 10
-    cross_lookup = [
-        [
-            [
-                x_offset+cross_padding, # = 10
-                y_offset+cross_padding, # = 10
-                x_offset+round(board_size*midpoint_offset[0])-cross_padding, # = 155
-                y_offset+round(board_size*midpoint_offset[0])-cross_padding  # = 155
-            ],
-            [
-                x_offset+cross_padding, # = 10
-                y_offset+round(board_size*midpoint_offset[0])-cross_padding, # = 155
-                x_offset+round(board_size*midpoint_offset[0])-cross_padding, # = 155
-                y_offset+cross_padding, # = 10
-            ]
-        ],
-    ]
-    circle_lookup = [
-            [0,0], [1,0], [2,0],
-            [0,1], [1,1], [2,1],
-            [0,2], [1,2], [2,2]
+    token_size = 10
+
+    tile_size = round(board_size/3)
+
+    index_midpoints = [
+        [round(board_size/6), round(board_size/6)], [round(board_size/2),round(board_size/6)], [round(board_size*5/6),round(board_size/6)],
+        [round(board_size/6), round(board_size/2)], [round(board_size/2),round(board_size/2)], [round(board_size*5/6),round(board_size/2)],
+        [round(board_size/6), round(board_size*5/6)], [round(board_size/2),round(board_size*5/6)], [round(board_size*5/6),round(board_size*5/6)], 
     ]
 
     def o(index: int) -> None:
-        x, y = [round(board_size * line_offset[i]) for i in circle_lookup[index]]
-        drawCircle(x_offset+x,y_offset+y,round(board_size/10),COLOURS["WHITE"])
+        x, y = index_midpoints[index]
+        drawCircle(x_offset+x,y_offset+y,round(board_size*(token_size/100)),COLOURS["WHITE"])
     
     def x(index: int, colour: bytes = COLOURS["WHITE"]) -> None:
-        for line in cross_lookup[index]:
-            start_x, start_y, end_x, end_y = line
-            drawLine(start_x,start_y,end_x,end_y,colour)
+        s = round(board_size*(token_size/100))
+        mid_x, mid_y = index_midpoints[index]
+        drawLine(x_offset+mid_x-s,y_offset+mid_y-s,x_offset+mid_x+s,y_offset+mid_y+s,colour)
+        drawLine(x_offset+mid_x-s,y_offset+mid_y+s,x_offset+mid_x+s,y_offset+mid_y-s, colour)
 
     for i in [0.33,0.66]:
         offset = round(board_size * i)
         drawRectangle(x_offset,y_offset+offset,x_offset+board_size, y_offset+offset+line_thickness, COLOURS["WHITE"])
         drawRectangle(x_offset+offset,y_offset,x_offset+offset+line_thickness,y_offset+board_size,COLOURS["WHITE"])
 
-    for i in range(1,4):
-        o(i)
-    # drawRectangle(0,0,round(section_size*0.25),round(section_size*0.25),COLOURS["YELLOW"])
-    # drawRectangle(section_size-round(section_size*0.25),section_size-round(section_size*0.25),165,165,COLOURS["YELLOW"])
-    # drawRectangle(500,500,750,750,COLOURS["WHITE"])
-    # drawLine(500,500,750,750,COLOURS["BLUE"])
-    # drawLine(183,183,400,400,COLOURS['PURPLE'])
-    x(0,colour=COLOURS["RED"])
+    funcs = [o, x]
+    moves = [0,4,2,1,7,5,3,6,8]
+    for i in range(len(moves)):
+        funcs[i%2](moves[i])
     updateFrameBuffer()
 
 if __name__ == "__main__":
-    drawTicTacToeBoard(x_offset=0)
+    drawTicTacToeBoard(x_offset=round(WIDTH/2)-300, y_offset=20)
