@@ -180,7 +180,8 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     moves = [0,4,2,1,7,5,3,6,8]
     for i in range(len(moves)):
         funcs[i%2](moves[i])
-    updateFrameBuffer()
+        updateFrameBuffer()
+        input()
 
 if __name__ == "__main__":
     drawTicTacToeBoard(x_offset=round(WIDTH/2)-300, y_offset=20)
