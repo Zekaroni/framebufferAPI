@@ -202,6 +202,7 @@ def startGame() -> None:
             print(gameStatus)
             for token in gameStatus[1]:
                 board.functions_proxy[current_player](token,b'\x00\xFF\x00\x00')
+            renderEngine.updateFrameBuffer()
             break
 
 
