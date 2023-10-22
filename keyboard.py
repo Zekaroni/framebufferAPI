@@ -1,10 +1,11 @@
 keyboard_device = "/dev/input/event2"
 
 KEYS = {
-    26880: "LEFT",
     27648: "DOWN",
     27136: "RIGHT",
+    26880: "LEFT",
     26368: "UP",
+    7168:  "ENTER",
     256:   "ESC",
 }
 EVENT_SIZE = 24
