@@ -9,7 +9,7 @@ KEYS = {
     256:   "ESC",
 }
 STATES = {}
-for i in KEYS: KEYS[i] = 0
+for i in KEYS: STATES[i] = 0
 UNKNOWN_EVENT = 1024
 EVENT_SIZE = 24
 
