@@ -203,7 +203,7 @@ class KeyBoardEventManager:
 def keyboardTest():
     keyboard = KeyBoardEventManager()
     while True:
-        userInput = keyboard.getInput
+        userInput = keyboard.getInput()
         if userInput:
             print(userInput)
 
