@@ -175,13 +175,15 @@ class TicTacToeBoard:
             offset = round(self.board_size * i)
             self.renderer.drawRectangle(self.x_offset,self.y_offset+offset,self.x_offset+self.board_size, self.y_offset+offset+self.line_thickness, self.renderer.COLOURS["WHITE"])
             self.renderer.drawRectangle(self.x_offset+offset,self.y_offset,self.x_offset+offset+self.line_thickness,self.y_offset+self.board_size, self.renderer.COLOURS["WHITE"])
+        self.renderer.updateFrameBuffer()
 
 def startGame() -> None:
     renderEngine = RenderEngine()
     board = TicTacToeBoard(renderEngine)
     game = Game()
     ai = AI(game)
-
+    renderEngine.initTerminal()
+    board.drawBoard()
     while True:
         gameStatus = game.CheckWinner()
         if gameStatus != -1:
