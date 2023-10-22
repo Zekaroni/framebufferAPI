@@ -195,7 +195,7 @@ def startGame() -> None:
                 index = int(input("Enter index"))
                 valid_move = game.Play(index)
             current_player = game._inverse_player[game.turn]
-            board.functions_proxy[current_player](index,board.player_colours[current_player])
+            board.functions_proxy[current_player](index)
             renderEngine.updateFrameBuffer()
         else:
             print(gameStatus)
