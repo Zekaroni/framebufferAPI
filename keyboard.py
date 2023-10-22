@@ -11,11 +11,11 @@ with open(keyboard_device, "rb") as f:
             break
         data = bytearray(event_data)
         
-        tv_sec  = int.from_bytes(bytes(data[0:9]))
-        tv_usec = int.from_bytes(bytes(data[9:17]))
-        evtype  = int.from_bytes(bytes(data[17:20]))
-        code    = int.from_bytes(bytes(data[20:23]))
-        value   = int.from_bytes(bytes(data[23:]))
+        tv_sec  = int.from_bytes(bytes(data[0:9]), byteorder='little')
+        tv_usec = int.from_bytes(bytes(data[9:17]), byteorder='little')
+        evtype  = int.from_bytes(bytes(data[17:20]), byteorder='little')
+        code    = int.from_bytes(bytes(data[20:23]), byteorder='little')
+        value   = int.from_bytes(bytes(data[23:]), byteorder='little')
 
         print(
             f"Type: {evtype}\nCode: {code}\nValue: {value}"
