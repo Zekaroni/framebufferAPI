@@ -9,8 +9,8 @@ class Game:
     
     def Play(self, index: int) -> bool:
         if not self.board[index]:
-            self.board[index] = self.Turn
-            self.turn = self._inverse_player[self.Turn]
+            self.board[index] = self.turn
+            self.turn = self._inverse_player[self.turn]
             return True
         else: return False
 
@@ -18,7 +18,7 @@ class Game:
         __winner = -1
         for win_state in self._win_states:
             _a, _b, _c = [self.board[i] for i in win_state]
-            if (_a or _b or _c) and (_a == _b == _c): __winner = self._player_proxy[self._inverse_player[self.Turn]]
+            if (_a or _b or _c) and (_a == _b == _c): __winner = self._player_proxy[self._inverse_player[self.turn]]
         if len(''.join(self.board)) > 8 and __winner == -1: __winner = 2
         return __winner
 
@@ -48,12 +48,13 @@ class AI:
         return _seed % randRange
     
     def __easy__(self) -> list:
-        _grid = self.currentGame.Grid
+        _grid = self.currentGame.board
         while True:
             _r = self.pseduoRandomGeneration(3)
-            _c = self.pseduoRandomGeneration(3)
-            if _grid[_r][_c] == '':
-                return [_r,_c]
+            _c = self.pseduoRandomGeneration(4)
+            result = _r + _c
+            if _grid[result] == '':
+                return [result]
 
     def __medium__(self, easy_fallback=True):
         for win_state in self._WIN_STATES:
