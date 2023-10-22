@@ -2,7 +2,7 @@ keyboard_device = "/dev/input/event2"
 
 # Open the device file in binary mode
 with open(keyboard_device, "rb") as f:
-    event_size = 24  # Size of each input event (bytes) (I counted 25, maybe misscount)
+    event_size = 24  # Size of each input event (bytes)
 
     while True:
         event_data = f.read(event_size)
@@ -11,7 +11,6 @@ with open(keyboard_device, "rb") as f:
             break
 
         # Parse the event data into its components
-        # Each part corresponds to specific information about the input event
         time_sec, time_usec, event_type, event_code, event_value = (
             int.from_bytes(event_data[i:i + 8], byteorder='little')
             for i in range(0, event_size, 8)
