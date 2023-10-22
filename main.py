@@ -199,7 +199,7 @@ def startGame() -> None:
             board.functions_proxy[current_player](index,board.player_colours[current_player])
             renderEngine.updateFrameBuffer()
         else:
-            print(game._outcomes[gameStatus])
+            print(gameStatus)
             break
 
 
