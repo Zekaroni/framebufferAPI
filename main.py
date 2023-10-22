@@ -187,7 +187,7 @@ def startGame() -> None:
     board.drawBoard()
     while True:
         gameStatus = game.CheckWinner()
-        if gameStatus != -1:
+        if gameStatus == -1:
             move = False
             while not move:
                 user = int(input("Enter index"))
