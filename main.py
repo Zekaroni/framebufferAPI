@@ -192,6 +192,7 @@ class KeyBoardEventManager:
     def getInput(self):
         with open(self.KEYBOARD_DEVICE, "rb") as f:
             event_data = f.read(self.EVENT_SIZE)
+            print(event_data)
             if len(event_data) != self.EVENT_SIZE:
                 return 0
             data = bytearray(event_data)
