@@ -179,6 +179,8 @@ class TicTacToeBoard:
             self.renderer.drawRectangle(self.x_offset,self.y_offset+offset,self.x_offset+self.board_size, self.y_offset+offset+self.line_thickness, self.renderer.COLOURS["WHITE"])
             self.renderer.drawRectangle(self.x_offset+offset,self.y_offset,self.x_offset+offset+self.line_thickness,self.y_offset+self.board_size, self.renderer.COLOURS["WHITE"])
         self.renderer.updateFrameBuffer()
+    
+    # TODO: Add logic so that a cursor can be rendered and stored. Turn token red if can not be placed there
 
 class KeyBoardEventManager:
     def __init__(self, keyboard_path: str = "/dev/input/event2"):
@@ -234,4 +236,4 @@ def startGame() -> None:
             break
 
 if __name__ == "__main__":
-    keyboardTest()
+    startGame()
