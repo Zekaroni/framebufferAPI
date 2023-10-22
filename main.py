@@ -151,7 +151,7 @@ class RenderEngine:
                 e-=2*radius-1
                 radius-=1
 
-class TicTacToeBoard:
+class TicTacToeRenderer:
     def __init__(self, renderer: RenderEngine,x_offset: int = 0, y_offset: int = 0, board_size: int = 500, line_thickness: int = 5, token_size: int = 10) -> None:
         self.renderer = renderer
         self.board_size = board_size
@@ -179,8 +179,8 @@ class TicTacToeBoard:
             self.renderer.drawRectangle(self.x_offset,self.y_offset+offset,self.x_offset+self.board_size, self.y_offset+offset+self.line_thickness, self.renderer.COLOURS["WHITE"])
             self.renderer.drawRectangle(self.x_offset+offset,self.y_offset,self.x_offset+offset+self.line_thickness,self.y_offset+self.board_size, self.renderer.COLOURS["WHITE"])
         self.renderer.updateFrameBuffer()
-    
-    # TODO: Add logic so that a cursor can be rendered and stored. Turn token red if can not be placed there
+
+
 
 class KeyBoardEventManager:
     def __init__(self, keyboard_path: str = "/dev/input/event2"):
@@ -203,6 +203,14 @@ class KeyBoardEventManager:
                 state = int.from_bytes(bytes(data[20:23]), byteorder='little')
                 return [self.KEYS[evtype],state]
 
+class BoardLogicHandler:
+    def __init__(self, game: Game, boardRenderer: TicTacToeRenderer, renderEngine: RenderEngine):
+        self.game = game
+        self.boardRenderer = boardRenderer
+    
+    def moveCursor(self):
+        pass
+
 def keyboardTest():
     keyboard = KeyBoardEventManager()
     while True:
@@ -213,9 +221,8 @@ def keyboardTest():
 
 def startGame() -> None:
     renderEngine = RenderEngine()
-    board = TicTacToeBoard(renderEngine)
+    board = TicTacToeRenderer(renderEngine)
     game = Game()
-    ai = AI(game)
     renderEngine.initTerminal()
     board.drawBoard()
     while True:
