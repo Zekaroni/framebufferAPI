@@ -5,5 +5,6 @@ with open(keyboard_device, "rb") as f:
         event_data = f.read(event_size)
         if len(event_data) != event_size:
             break
-        a,b,c = (int.from_bytes(event_data[i:i + 8], byteorder='little')for i in range(0, event_size, 8))
-        print(a,b,c)
+        print(event_data)
+        # a,b,c = (int.from_bytes(event_data[i:i + 8], byteorder='little')for i in range(0, event_size, 8))
+        # print(a,b,c)
