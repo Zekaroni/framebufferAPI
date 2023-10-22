@@ -1,5 +1,4 @@
-keyboard_device = "/dev/input/event2"
-
+KEYBOARD_DEVICE = "/dev/input/event2"
 KEYS = {
     27648: "DOWN",
     27136: "RIGHT",
@@ -13,7 +12,7 @@ for i in KEYS: STATES[i] = 0
 UNKNOWN_EVENT = 1024
 EVENT_SIZE = 24
 
-with open(keyboard_device, "rb") as f:
+with open(KEYBOARD_DEVICE, "rb") as f:
     while True:
         event_data = f.read(EVENT_SIZE)
         if len(event_data) != EVENT_SIZE:

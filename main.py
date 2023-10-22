@@ -180,6 +180,28 @@ class TicTacToeBoard:
             self.renderer.drawRectangle(self.x_offset+offset,self.y_offset,self.x_offset+offset+self.line_thickness,self.y_offset+self.board_size, self.renderer.COLOURS["WHITE"])
         self.renderer.updateFrameBuffer()
 
+class KeyBoardEventManager:
+    def __init__(self, keyboard_path: str = "/dev/input/event2"):
+        self.KEYBOARD_DEVICE = keyboard_path
+        self.KEYS = {27648:"DOWN",27136:"RIGHT",26880:"LEFT",26368:"UP",7168:"ENTER",256:"ESC",}
+        self.STATES = {}
+        for i in self.KEYS: self.STATES[i] = 0
+        self.UNKNOWN_EVENT = 1024
+        self.EVENT_SIZE = 24
+
+    def run(self):
+        with open(self.KEYBOARD_DEVICE, "rb") as f:
+            while True:
+                event_data = f.read(self.EVENT_SIZE)
+                if len(event_data) != self.EVENT_SIZE:
+                    break
+                data = bytearray(event_data)
+                evtype  = int.from_bytes(bytes(data[17:20]), byteorder='little')
+                if evtype and evtype!=self.UNKNOWN_EVENT:
+                    state    = int.from_bytes(bytes(data[20:23]), byteorder='little')
+                    return [evtype,state]
+
+
 def startGame() -> None:
     renderEngine = RenderEngine()
     board = TicTacToeBoard(renderEngine)
