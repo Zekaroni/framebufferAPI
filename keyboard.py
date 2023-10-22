@@ -10,5 +10,5 @@ with open(keyboard_device, "rb") as f:
         print(
             f"A = {a}\n",
             f"B = {b}\n",
-            f"C = {c}"
-            )
+            f"C = {c}",
+            sep="")
