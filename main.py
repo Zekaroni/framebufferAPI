@@ -189,17 +189,23 @@ class KeyBoardEventManager:
         self.UNKNOWN_EVENT = 1024
         self.EVENT_SIZE = 24
 
-    def run(self):
+    def getInput(self):
         with open(self.KEYBOARD_DEVICE, "rb") as f:
-            while True:
-                event_data = f.read(self.EVENT_SIZE)
-                if len(event_data) != self.EVENT_SIZE:
-                    break
-                data = bytearray(event_data)
-                evtype  = int.from_bytes(bytes(data[17:20]), byteorder='little')
-                if evtype and evtype!=self.UNKNOWN_EVENT:
-                    state    = int.from_bytes(bytes(data[20:23]), byteorder='little')
-                    return [evtype,state]
+            event_data = f.read(self.EVENT_SIZE)
+            if len(event_data) != self.EVENT_SIZE:
+                return 0
+            data = bytearray(event_data)
+            evtype  = int.from_bytes(bytes(data[17:20]), byteorder='little')
+            if evtype and evtype!=self.UNKNOWN_EVENT:
+                state    = int.from_bytes(bytes(data[20:23]), byteorder='little')
+                return [evtype,state]
+
+def keyboardTest():
+    keyboard = KeyBoardEventManager()
+    while True:
+        userInput = keyboard.getInput
+        if userInput:
+            print(userInput)
 
 
 def startGame() -> None:
@@ -227,4 +233,4 @@ def startGame() -> None:
             break
 
 if __name__ == "__main__":
-    startGame()
+    keyboardTest()
