@@ -22,6 +22,6 @@ with open(keyboard_device, "rb") as f:
             code    = int.from_bytes(bytes(data[20:23]), byteorder='little')
             value   = int.from_bytes(bytes(data[23:]), byteorder='little')
             print(
-                f"Type: {KEYS[evtype] if evtype in KEYS else evtype} - Code: {code} - Value: {value}",
+                f"Type: {KEYS[evtype] if evtype in KEYS else evtype} - Code: {code} - Value: {value}       ",
                 end="\r"
             )
