@@ -112,7 +112,7 @@ def drawCircle(center_x: int, center_y: int, radius: int, colour: bytes, thickne
         e+=2*y+1
         y+=1
         if e >= 0:
-            e -2*x-1
+            e-=2*x-1
             x-=1
 
 
