@@ -8,6 +8,7 @@ KEYS = {
     7168:  "ENTER",
     256:   "ESC",
 }
+UNKNOWN_EVENT = 1024
 EVENT_SIZE = 24
 
 with open(keyboard_device, "rb") as f:
@@ -17,7 +18,7 @@ with open(keyboard_device, "rb") as f:
             break
         data = bytearray(event_data)
         evtype  = int.from_bytes(bytes(data[17:20]), byteorder='little')
-        if evtype:
+        if evtype and evtype!=UNKNOWN_EVENT:
             code    = int.from_bytes(bytes(data[20:23]), byteorder='little')
             value   = int.from_bytes(bytes(data[23:]), byteorder='little')
             print(
