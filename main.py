@@ -70,7 +70,6 @@ class AI:
                     if _remaining_tile is not None:
                         if self._hash_board[_remaining_tile] == '':
                             return _remaining_tile
-                    
         return self.__easy__() if easy_fallback else 0
 
 class RenderEngine:
@@ -161,18 +160,18 @@ class TicTacToeBoard:
         self.line_thickness = line_thickness
         self.token_size = token_size
         self.index_midpoints = [[round(board_size/6), round(board_size/6)], [round(board_size/2),round(board_size/6)], [round(board_size*5/6),round(board_size/6)],[round(board_size/6), round(board_size/2)], [round(board_size/2),round(board_size/2)], [round(board_size*5/6),round(board_size/2)],[round(board_size/6), round(board_size*5/6)], [round(board_size/2),round(board_size*5/6)], [round(board_size*5/6),round(board_size*5/6)], ]
-        self.player_colours = {"X":b'\xFF\xFF\xFF\x00', "O":b'\xFF\xFF\xFF\x00'}
+        self.player_colours = {"X":self.renderer.COLOURS["WHITE"], "O":self.renderer.COLOURS["WHITE"]}
         self.functions_proxy = {"X": self.drawX, "O": self.drawO}
 
-    def drawO(self, index: int, colour: bytes) -> None:
+    def drawO(self, index: int) -> None:
         x, y = self.index_midpoints[index]
-        self.renderer.drawCircle(self.x_offset+x,self.y_offset+y,round(self.board_size*(self.token_size/100)),colour)
+        self.renderer.drawCircle(self.x_offset+x,self.y_offset+y,round(self.board_size*(self.token_size/100)),self.player_colours["O"])
 
-    def drawX(self, index: int, colour: bytes) -> None:
+    def drawX(self, index: int) -> None:
         s = round(self.board_size*(self.token_size/100))
         mid_x, mid_y = self.index_midpoints[index]
-        self.renderer.drawLine(self.x_offset+mid_x-s,self.y_offset+mid_y-s,self.x_offset+mid_x+s,self.y_offset+mid_y+s,colour)
-        self.renderer.drawLine(self.x_offset+mid_x-s,self.y_offset+mid_y+s,self.x_offset+mid_x+s,self.y_offset+mid_y-s,colour)
+        self.renderer.drawLine(self.x_offset+mid_x-s,self.y_offset+mid_y-s,self.x_offset+mid_x+s,self.y_offset+mid_y+s,self.player_colours["X"])
+        self.renderer.drawLine(self.x_offset+mid_x-s,self.y_offset+mid_y+s,self.x_offset+mid_x+s,self.y_offset+mid_y-s,self.player_colours["X"])
 
     def drawBoard(self):
         for i in [0.33,0.66]:
@@ -201,10 +200,9 @@ def startGame() -> None:
         else:
             print(gameStatus)
             for token in gameStatus[1]:
-                board.functions_proxy[current_player](token,b'\x00\xFF\x00\x00')
+                board.functions_proxy[current_player](token,renderEngine.COLOURS["GREEN"])
             renderEngine.updateFrameBuffer()
             break
-
 
 if __name__ == "__main__":
     startGame()
