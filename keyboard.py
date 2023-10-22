@@ -5,6 +5,7 @@ KEYS = {
     27648: "DOWN",
     27136: "RIGHT",
     26368: "UP",
+    256:   "ESC",
 }
 EVENT_SIZE = 24
 
