@@ -18,6 +18,4 @@ with open(keyboard_device, "rb") as f:
         event_code = int.from_bytes(event_data[10:12], byteorder='little')
         event_value = int.from_bytes(event_data[12:16], byteorder='little')
 
-        if event_type == 1 and event_value == 1:
-            # Key press event
-            print(f"Key pressed: Event Code {event_code}")
+        print(f"Key pressed: Event Code {event_code}")
