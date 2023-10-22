@@ -154,6 +154,7 @@ class RenderEngine:
 class TicTacToeBoard:
     def __init__(self, renderer: RenderEngine,x_offset: int = 0, y_offset: int = 0, board_size: int = 500, line_thickness: int = 5, token_size: int = 10) -> None:
         self.renderer = renderer
+        self.board_size = board_size
         self.x_offset = x_offset
         self.y_offset = y_offset
         self.line_thickness = line_thickness
