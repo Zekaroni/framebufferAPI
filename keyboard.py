@@ -8,6 +8,8 @@ KEYS = {
     7168:  "ENTER",
     256:   "ESC",
 }
+STATES = {}
+for i in KEYS: KEYS[i] = 0
 UNKNOWN_EVENT = 1024
 EVENT_SIZE = 24
 
