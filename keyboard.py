@@ -19,6 +19,8 @@ with open(keyboard_device, "rb") as f:
         data = bytearray(event_data)
         
         evtype  = int.from_bytes(bytes(data[17:20]), byteorder='little')
+        if not evtype:
+            break
         code    = int.from_bytes(bytes(data[20:23]), byteorder='little')
         value   = int.from_bytes(bytes(data[23:]), byteorder='little')
 
