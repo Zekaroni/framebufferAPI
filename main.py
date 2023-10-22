@@ -17,9 +17,9 @@ class Game:
     def CheckWinner(self) -> str:
         __winner = -1
         for win_state in self._win_states:
-            _a, _b, _c = [self._hash_board[i] for i in win_state]
+            _a, _b, _c = [self.board[i] for i in win_state]
             if (_a or _b or _c) and (_a == _b == _c): __winner = self._player_proxy[self._inverse_player[self.Turn]]
-        if len(''.join(self._hash_board)) > 8 and __winner == -1: __winner = 2
+        if len(''.join(self.board)) > 8 and __winner == -1: __winner = 2
         return __winner
 
     def NewGame(self) -> None:
