@@ -22,6 +22,5 @@ with open(keyboard_device, "rb") as f:
         evtype  = int.from_bytes(bytes(data[17:20]), byteorder='little')
         if evtype and evtype!=UNKNOWN_EVENT:
             code    = int.from_bytes(bytes(data[20:23]), byteorder='little')
-            value   = int.from_bytes(bytes(data[23:]), byteorder='little')  
             print("\x1b[2J\x1b[H",end="")
-            print(f"Type: {KEYS[evtype] if evtype in KEYS else evtype} - Code: {'PRESSED' if code else 'RELEASED'} - Value: {value}       ",end="\r")
+            print(f"Type: {KEYS[evtype] if evtype in KEYS else evtype} - Code: {'PRESSED' if code else 'RELEASED'}       ",end="\r")
