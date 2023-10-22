@@ -36,7 +36,7 @@ class AI:
         self._INVERSE_PROXY  = self.currentGame._inverse_player
         self.opponent = self._INVERSE_PROXY[self.player]
         self._WIN_STATES = currentGame._win_states
-        self._hash_board = currentGame._hash_board
+        self._hash_board = currentGame.board
 
     def play(self) -> list:
         return self.ALGORITHMS[self.difficulty]()
