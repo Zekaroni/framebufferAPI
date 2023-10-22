@@ -163,15 +163,15 @@ class TicTacToeBoard:
         self.player_colours = {"X":self.renderer.COLOURS["WHITE"], "O":self.renderer.COLOURS["WHITE"]}
         self.functions_proxy = {"X": self.drawX, "O": self.drawO}
 
-    def drawO(self, index: int) -> None:
+    def drawO(self, index: int, colour: bytes) -> None:
         x, y = self.index_midpoints[index]
-        self.renderer.drawCircle(self.x_offset+x,self.y_offset+y,round(self.board_size*(self.token_size/100)),self.player_colours["O"])
+        self.renderer.drawCircle(self.x_offset+x,self.y_offset+y,round(self.board_size*(self.token_size/100)),colour)
 
-    def drawX(self, index: int) -> None:
+    def drawX(self, index: int, colour: bytes) -> None:
         s = round(self.board_size*(self.token_size/100))
         mid_x, mid_y = self.index_midpoints[index]
-        self.renderer.drawLine(self.x_offset+mid_x-s,self.y_offset+mid_y-s,self.x_offset+mid_x+s,self.y_offset+mid_y+s,self.player_colours["X"])
-        self.renderer.drawLine(self.x_offset+mid_x-s,self.y_offset+mid_y+s,self.x_offset+mid_x+s,self.y_offset+mid_y-s,self.player_colours["X"])
+        self.renderer.drawLine(self.x_offset+mid_x-s,self.y_offset+mid_y-s,self.x_offset+mid_x+s,self.y_offset+mid_y+s,colour)
+        self.renderer.drawLine(self.x_offset+mid_x-s,self.y_offset+mid_y+s,self.x_offset+mid_x+s,self.y_offset+mid_y-s,colour)
 
     def drawBoard(self):
         for i in [0.33,0.66]:
@@ -195,7 +195,7 @@ def startGame() -> None:
                 index = int(input("Enter index"))
                 valid_move = game.Play(index)
             current_player = game._inverse_player[game.turn]
-            board.functions_proxy[current_player](index)
+            board.functions_proxy[current_player](index,board.player_colours[current_player])
             renderEngine.updateFrameBuffer()
         else:
             print(gameStatus)
