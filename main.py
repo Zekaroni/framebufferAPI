@@ -161,7 +161,8 @@ class TicTacToeBoard:
         self.line_thickness = line_thickness
         self.token_size = token_size
         self.index_midpoints = [[round(board_size/6), round(board_size/6)], [round(board_size/2),round(board_size/6)], [round(board_size*5/6),round(board_size/6)],[round(board_size/6), round(board_size/2)], [round(board_size/2),round(board_size/2)], [round(board_size*5/6),round(board_size/2)],[round(board_size/6), round(board_size*5/6)], [round(board_size/2),round(board_size*5/6)], [round(board_size*5/6),round(board_size*5/6)], ]
-        self.functions_proxy = {"X": self.drawX, "Y": self.drawO}
+        self.player_colours = {"X":b'\xFF\xFF\xFF\x00', "O":b'\xFF\xFF\xFF\x00'}
+        self.functions_proxy = {"X": self.drawX, "O": self.drawO}
 
     def drawO(self, index: int, colour: bytes) -> None:
         x, y = self.index_midpoints[index]
@@ -194,7 +195,7 @@ def startGame() -> None:
             while not move:
                 user = int(input("Enter index"))
                 move = game.Play(user)
-            board.functions_proxy[game.turn](move)
+            board.functions_proxy[game.turn](move,)
         else:
             print(game._outcomes[gameStatus])
 
