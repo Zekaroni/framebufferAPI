@@ -1,4 +1,4 @@
-keyboard_device = "/dev/input/eventX"  # Replace X with the appropriate device number
+keyboard_device = "/dev/input/event2"  # Replace X with the appropriate device number
 
 # Open the device file in binary mode
 with open(keyboard_device, "rb") as f:
