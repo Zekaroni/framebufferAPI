@@ -11,10 +11,12 @@ with open(keyboard_device, "rb") as f:
             break
 
         # Parse the event data into its components
-        time_sec, time_usec, event_type, event_code, event_value = (
-            int.from_bytes(event_data[i:i + 8], byteorder='little')
-            for i in range(0, event_size, 8)
-        )
+        # Each component has a specific size in bytes
+        time_sec = int.from_bytes(event_data[0:4], byteorder='little')
+        time_usec = int.from_bytes(event_data[4:8], byteorder='little')
+        event_type = int.from_bytes(event_data[8:10], byteorder='little')
+        event_code = int.from_bytes(event_data[10:12], byteorder='little')
+        event_value = int.from_bytes(event_data[12:16], byteorder='little')
 
         if event_type == 1 and event_value == 1:
             # Key press event
