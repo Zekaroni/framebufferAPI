@@ -198,7 +198,7 @@ class KeyBoardEventManager:
             evtype = int.from_bytes(bytes(data[17:20]), byteorder='little')
             if evtype and evtype!=self.UNKNOWN_EVENT:
                 state = int.from_bytes(bytes(data[20:23]), byteorder='little')
-                return [evtype,state]
+                return [self.KEYS[evtype],state]
             return -1
 
 def keyboardTest():
