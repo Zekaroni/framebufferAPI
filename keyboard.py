@@ -1,4 +1,4 @@
-keyboard_device = "/dev/input/event2"  # Replace X with the appropriate device number
+keyboard_device = "/dev/input/event"  # Replace X with the appropriate device number
 
 # Open the device file in binary mode
 with open(keyboard_device, "rb") as f:
@@ -11,11 +11,9 @@ with open(keyboard_device, "rb") as f:
             break
 
         # Extract values from the event data
-        time, value, event_type, code, _ = (
+        a,b,c = (
             int.from_bytes(event_data[i:i + 8], byteorder='little')
             for i in range(0, event_size, 8)
         )
 
-        if event_type == 1 and value == 1:
-            # Key press event
-            print(f"Key pressed: {code}")
+        print(a,b,c)
