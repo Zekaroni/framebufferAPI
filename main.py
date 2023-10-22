@@ -18,7 +18,7 @@ class Game:
         __winner = -1
         for win_state in self._win_states:
             _a, _b, _c = [self.board[i] for i in win_state]
-            if (_a or _b or _c) and (_a == _b == _c): __winner = self._player_proxy[self._inverse_player[self.turn]]
+            if (_a or _b or _c) and (_a == _b == _c): __winner = [self._player_proxy[self._inverse_player[self.turn]],[_a,_b,_c]]
         if len(''.join(self.board)) > 8 and __winner == -1: __winner = 2
         return __winner
 
