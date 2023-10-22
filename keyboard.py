@@ -6,24 +6,18 @@ KEYS = {
     27136: "RIGHT",
     26368: "UP",
 }
+EVENT_SIZE = 24
 
-# Open the device file in binary mode
 with open(keyboard_device, "rb") as f:
-    event_size = 24  # Size of each input event (bytes)
-
     while True:
-        event_data = f.read(event_size)
-
-        if len(event_data) != event_size:
+        event_data = f.read(EVENT_SIZE)
+        if len(event_data) != EVENT_SIZE:
             break
         data = bytearray(event_data)
-        
         evtype  = int.from_bytes(bytes(data[17:20]), byteorder='little')
-        if not evtype:
-            break
-        code    = int.from_bytes(bytes(data[20:23]), byteorder='little')
-        value   = int.from_bytes(bytes(data[23:]), byteorder='little')
-
-        print(
-            f"Type: {KEYS[evtype] if evtype in KEYS else evtype} - Code: {code} - Value: {value}"
+        if evtype:
+            code    = int.from_bytes(bytes(data[20:23]), byteorder='little')
+            value   = int.from_bytes(bytes(data[23:]), byteorder='little')
+            print(
+                f"Type: {KEYS[evtype] if evtype in KEYS else evtype} - Code: {code} - Value: {value}"
             )
