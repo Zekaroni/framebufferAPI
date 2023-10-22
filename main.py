@@ -191,10 +191,10 @@ def startGame() -> None:
     while True:
         gameStatus = game.CheckWinner()
         if gameStatus == -1:
-            move = False
-            while not move:
+            valid_move = False
+            while not valid_move:
                 index = int(input("Enter index"))
-                move = game.Play(index)
+                valid_move = game.Play(index)
             current_player = game._inverse_player[game.turn]
             board.functions_proxy[current_player](index,board.player_colours[current_player])
             renderEngine.updateFrameBuffer()
