@@ -192,20 +192,22 @@ class KeyBoardEventManager:
     def getInput(self):
         with open(self.KEYBOARD_DEVICE, "rb") as f:
             event_data = f.read(self.EVENT_SIZE)
-            print(event_data)
             if len(event_data) != self.EVENT_SIZE:
                 return 0
             data = bytearray(event_data)
-            evtype  = int.from_bytes(bytes(data[17:20]), byteorder='little')
+            evtype = int.from_bytes(bytes(data[17:20]), byteorder='little')
             if evtype and evtype!=self.UNKNOWN_EVENT:
-                state    = int.from_bytes(bytes(data[20:23]), byteorder='little')
+                state = int.from_bytes(bytes(data[20:23]), byteorder='little')
                 return [evtype,state]
+            return -1
 
 def keyboardTest():
     keyboard = KeyBoardEventManager()
     while True:
         userInput = keyboard.getInput()
-        if userInput:
+        if userInput == -1:
+            print("idk tbh")
+        elif userInput:
             print(userInput)
 
 
