@@ -195,7 +195,7 @@ def startGame() -> None:
             while not move:
                 user = int(input("Enter index"))
                 move = game.Play(user)
-            board.functions_proxy[game.turn](move,)
+            board.functions_proxy[game.turn](move,board.player_colours[game.turn])
         else:
             print(game._outcomes[gameStatus])
 
