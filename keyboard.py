@@ -9,13 +9,14 @@ with open(keyboard_device, "rb") as f:
 
         if len(event_data) != event_size:
             break
+        data = bytearray(event_data)
+        
+        tv_sec  = data[0:9]
+        tv_usec = data[9:17]
+        evtype  = data[17:20]
+        code    = data[20:23]
+        value   = data[23:]
 
-        # Parse the event data into its components
-        # Each component has a specific size in bytes
-        time_sec = int.from_bytes(event_data[0:4], byteorder='little')
-        time_usec = int.from_bytes(event_data[4:8], byteorder='little')
-        event_type = int.from_bytes(event_data[8:10], byteorder='little')
-        event_code = int.from_bytes(event_data[10:12], byteorder='little')
-        event_value = int.from_bytes(event_data[12:16], byteorder='little')
-
-        print(f"Key pressed: Event Code {event_code}")
+        print(
+            f"Type: {evtype}\nCode: {code}\nValue: {value}"
+            )
