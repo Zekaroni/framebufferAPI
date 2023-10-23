@@ -246,9 +246,9 @@ class BoardLogicHandler:
 
     def drawToken(self) -> None:
         if self.game.board[self.cursorPosition]:
-            self.boardRenderer.functions_proxy[self.game._inverse_player[self.game.turn]](self.cursorPosition, self.renderer.COLOURS["RED"])
+            self.boardRenderer.functions_proxy[self.game.turn](self.cursorPosition, self.renderer.COLOURS["RED"])
         else:
-            self.boardRenderer.functions_proxy[self.game._inverse_player[self.game.turn]](self.cursorPosition, self.renderer.COLOURS["PURPLE"])
+            self.boardRenderer.functions_proxy[self.game.turn](self.cursorPosition, self.renderer.COLOURS["PURPLE"])
 
     def updateBuffer(self) -> None:
         self.renderEngine.updateFrameBuffer()
