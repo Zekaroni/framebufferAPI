@@ -241,7 +241,8 @@ class BoardLogicHandler:
             self.boardRenderer.y_offset + _mid[1] + _offset
         ]
         self.renderer.drawRectangle(x1,y1,x2,y2,self.renderer.COLOURS["BLACK"])
-        self.boardRenderer.functions_proxy[self.game.board[self.previousPosition]]
+        if self.game.board[self.previousPosition]:
+            self.boardRenderer.functions_proxy[self.game.board[self.previousPosition]](self.game.board[self.previousPosition], self.boardRenderer.player_colours[self.current_player])
         
 
     def drawToken(self) -> None:
