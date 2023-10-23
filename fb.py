@@ -147,12 +147,21 @@ def debug() -> None:
     drawLine(0,0,200,200,COLOURS["WHITE"])
     drawCircle(300,150,150,COLOURS["PASTEL_PINK"],thickness=3)
 
+
+
 def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     # TODO: Make some math logic that will detemine board size and render it accoding to variables
     initTerminal()
     board_size = 600
     line_thickness = 5
     token_size = 10
+    previous_position = 0
+
+    def resetPreviousTile():
+        _offset = round(board_size/6)
+        _mid = index_midpoints[previous_position]
+        x1, y1, x2, y2 = ([_mid - _offset]*2) + ([_mid - _offset]*2)
+        drawRectangle(x1,y1,x2,y2,COLOURS["BLACK"])
 
     index_midpoints = [
         [round(board_size/6), round(board_size/6)], [round(board_size/2),round(board_size/6)], [round(board_size*5/6),round(board_size/6)],
@@ -179,7 +188,9 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     moves = [0,4,2,1,7,5,3,6,8]
     for i in range(len(moves)):
         funcs[i%2](moves[i])
+        previous_position = i
         updateFrameBuffer()
+        resetPreviousTile()
         input()
 
 if __name__ == "__main__":

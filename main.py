@@ -19,7 +19,7 @@ class Game:
         for win_state in self._win_states:
             _a, _b, _c = [[self.board[i],i] for i in win_state]
             if (_a[0] or _b[0] or _c[0]) and (_a[0] == _b[0] == _c[0]): __winner = [self._player_proxy[self._inverse_player[self.turn]],[_a[1],_b[1],_c[1]]]
-        if len(''.join(self.board)) > 8 and __winner == -1: __winner = 2
+        if len(''.join(self.board)) > 8 and __winner == -1: __winner = [2,None]
         return __winner
 
     def NewGame(self) -> None:
@@ -137,6 +137,7 @@ class RenderEngine:
         y = 0
         while y < radius:
             for i in range(thickness):
+                # TODO: Streamline these for loops
                 for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
                     self.queueLocalChange(center_x + (radius*x_sign), center_y + (y*y_sign) + i, colour)
                 for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
@@ -178,16 +179,11 @@ class TicTacToeRenderer:
             offset = round(self.board_size * i)
             self.renderer.drawRectangle(self.x_offset,self.y_offset+offset,self.x_offset+self.board_size, self.y_offset+offset+self.line_thickness, self.renderer.COLOURS["WHITE"])
             self.renderer.drawRectangle(self.x_offset+offset,self.y_offset,self.x_offset+offset+self.line_thickness,self.y_offset+self.board_size, self.renderer.COLOURS["WHITE"])
-        self.renderer.updateFrameBuffer()
-
-
 
 class KeyBoardEventManager:
     def __init__(self, keyboard_path: str = "/dev/input/event2"):
         self.KEYBOARD_DEVICE = keyboard_path
-        self.KEYS = {27648:"DOWN",27136:"RIGHT",26880:"LEFT",26368:"UP",7168:"ENTER",256:"ESC",}
-        self.STATES = {}
-        for i in self.KEYS: self.STATES[i] = 0
+        self.KEYS = {27648:0,27136:1,26880:2,26368:3,7168:4,256:5,}
         self.UNKNOWN_EVENT = 1024
         self.EVENT_SIZE = 24
 
@@ -199,7 +195,7 @@ class KeyBoardEventManager:
                 return 0
             data = bytearray(event_data)
             evtype = int.from_bytes(bytes(data[17:20]), byteorder='little')
-            if evtype and evtype!=self.UNKNOWN_EVENT:
+            if evtype in self.KEYS and evtype!=self.UNKNOWN_EVENT:
                 state = int.from_bytes(bytes(data[20:23]), byteorder='little')
                 return [self.KEYS[evtype],state]
 
@@ -207,9 +203,46 @@ class BoardLogicHandler:
     def __init__(self, game: Game, boardRenderer: TicTacToeRenderer, renderEngine: RenderEngine):
         self.game = game
         self.boardRenderer = boardRenderer
+        self.renderer = renderEngine
+        self.cursorPosition = 0
+        self.previousPosition = 0
+        self.movements = [3,1,-1,-3]
+        self.current_player = self.game._inverse_player[self.game.turn]
+        # 0 1 2
+        # 3 4 5
+        # 6 7 8
+
+    def start(self):
+        self.renderEngine.initTerminal()
+        self.boardRenderer.drawBoard()
+
+    def moveCursor(self, event: int) -> bool:
+        move = self.movements[event]
+        if -1 < (self.cursorPosition + move) < 9:
+            return False
+        else:
+            self.previousPosition = self.cursorPosition
+            self.cursorPosition+=move
+            self.drawTokens()
+            return True
     
-    def moveCursor(self):
+    def confirmPosition(self) -> bool:
+        return self.game.Play(self.cursorPosition)
+    
+    def resetPreviousTile(self):
+        _offset = round(self.boardRenderer.board_size/6)
+        _mid = self.boardRenderer.index_midpoints[self.previousPosition]
+        x1, y1, x2, y2 = ([_mid - _offset]*2) + ([_mid - _offset]*2)
+        self.renderer.drawRectangle(x1,y1,x2,y2,self.renderer.COLOURS["BLACK"])
+        
+
+    def drawToken(self) -> None:
+
         pass
+
+    def updateBuffer(self) -> None:
+        self.renderEngine.updateFrameBuffer()
+
 
 def keyboardTest():
     keyboard = KeyBoardEventManager()
@@ -217,6 +250,15 @@ def keyboardTest():
         userInput = keyboard.getInput()
         if userInput:
             print(userInput)
+
+def new():
+    renderEngine = RenderEngine()
+    boardRenderer = TicTacToeRenderer(renderEngine)
+    mainGame = Game()
+    board = BoardLogicHandler(mainGame,boardRenderer,renderEngine)
+
+    
+
 
 
 def startGame() -> None:
