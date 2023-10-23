@@ -226,7 +226,7 @@ class BoardLogicHandler:
     
     def confirmPosition(self) -> bool:
         if self.game.Play(self.cursorPosition):
-            self.boardRenderer.functions_proxy[self.game.turn]
+            self.boardRenderer.functions_proxy[self.game._inverse_player[self.game.turn]](self.cursorPosition, self.boardRenderer.player_colours[self.game._inverse_player[self.game.turn]])
             self.drawToken()
             self.renderer.updateFrameBuffer()
     
