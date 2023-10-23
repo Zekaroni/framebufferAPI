@@ -265,6 +265,8 @@ def new():
         if userInput:
             if userInput[0] == 4 and userInput[1] == 1:
                 board.confirmPosition()
+            elif userInput[0] == 5 and userInput[1] == 1:
+                exit(0)
             elif userInput[1] == 1:
                 board.moveCursor(userInput[0])
 
