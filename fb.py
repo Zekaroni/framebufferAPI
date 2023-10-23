@@ -111,9 +111,9 @@ def debug() -> None:
     renderer = RenderEngine()
 
     renderer.initTerminal()
-    renderer.drawRectangle(400,200,1200,400,COLOURS["YELLOW"])
-    renderer.drawLine(0,0,200,200,COLOURS["WHITE"])
-    renderer.drawCircle(300,150,150,COLOURS["PASTEL_PINK"],thickness=3)
+    renderer.drawRectangle(400,200,1200,400,renderer.COLOURS["YELLOW"])
+    renderer.drawLine(0,0,200,200,renderer.COLOURS["WHITE"])
+    renderer.drawCircle(300,150,150,renderer.COLOURS["PASTEL_PINK"],thickness=3)
     renderer.drawImage("image.zeke", start_x=500, start_y=300)
 
     renderer.updateFrameBuffer()
