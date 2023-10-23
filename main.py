@@ -242,7 +242,7 @@ class BoardLogicHandler:
         ]
         self.renderer.drawRectangle(x1,y1,x2,y2,self.renderer.COLOURS["BLACK"])
         if self.game.board[self.previousPosition]:
-            self.boardRenderer.functions_proxy[self.game.board[self.previousPosition]](self.game.board[self.previousPosition], self.boardRenderer.player_colours[self.current_player])
+            self.boardRenderer.functions_proxy[self.game.board[self.previousPosition]](self.previousPosition, self.boardRenderer.player_colours[self.current_player])
         
 
     def drawToken(self) -> None:
@@ -276,6 +276,7 @@ def startGame() -> None:
     game = Game()
     renderEngine.initTerminal()
     board.drawBoard()
+    renderEngine.updateFrameBuffer()
     while True:
         gameStatus = game.CheckWinner()
         if gameStatus == -1:
