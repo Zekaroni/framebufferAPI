@@ -92,12 +92,12 @@ class RenderEngine:
             try:
                 image = open(filePath, "rb")
                 data = bytearray(image.read())
-                width = int.from_bytes(data[0:2], byteorder='little')
-                height = int.from_bytes(data[2:4], byteorder='little')
+                width = int.from_bytes(data[0:2],'little')
+                height = int.from_bytes(data[2:4],'little')
                 cursor = 4
                 for y in range(height):
                     for x in range(width):
-                        self.queueLocalChange(x+start_x,y+start_y,int.to_bytes((int.from_bytes(data[cursor:cursor+3], byteorder='little') << 8), byteorder='little'))
+                        self.queueLocalChange(x+start_x,y+start_y,(int.from_bytes(data[cursor:cursor+3],'little') << 8).to_bytes(4, 'little'))
                         cursor+=3
             except FileNotFoundError as e:
                 raise e
