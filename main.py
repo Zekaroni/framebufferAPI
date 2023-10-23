@@ -210,7 +210,7 @@ def start():
     board = BoardLogicHandler(mainGame,boardRenderer,renderEngine)
     renderEngine.initTerminal()
     keyboard = KeyBoardEventManager()
-    board.moveCursor(0)
+    board.moveCursor(2)
     boardRenderer.drawBoard()
     renderEngine.updateFrameBuffer()
     while True:
