@@ -200,4 +200,5 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
         input()
 
 if __name__ == "__main__":
-    drawTicTacToeBoard(x_offset=round(WIDTH/2)-300, y_offset=20)
+    readImage("image.zeke")
+    updateFrameBuffer()
