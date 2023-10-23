@@ -203,6 +203,7 @@ def start():
     boardRenderer = TicTacToeRenderer(renderEngine)
     mainGame = Game()
     board = BoardLogicHandler(mainGame,boardRenderer,renderEngine)
+    renderEngine.initTerminal()
     keyboard = KeyBoardEventManager()
     boardRenderer.drawBoard()
     while True:
@@ -216,6 +217,7 @@ def start():
                     for token in state[1]:
                         boardRenderer.functions_proxy[state[0]](token,renderEngine.COLOURS["GREEN"])
                     renderEngine.updateFrameBuffer()
+                    exit()
             elif userInput[0] == 5 and userInput[1] == 1:
                 exit(0)
             elif userInput[1] == 1:
