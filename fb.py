@@ -164,7 +164,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
             x_offset + _mid[0] - _offset,
             y_offset + _mid[1] - _offset,
             x_offset + _mid[0] + _offset,
-            y_offset + _mid[1] + offset
+            y_offset + _mid[1] + _offset
         ]
         drawRectangle(x1,y1,x2,y2,COLOURS["BLUE"])
         funcs[a](previous_position)
