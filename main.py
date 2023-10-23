@@ -230,6 +230,7 @@ class BoardLogicHandler:
     def confirmPosition(self) -> bool:
         if self.game.Play(self.cursorPosition):
             self.drawToken()
+            self.renderer.updateFrameBuffer()
     
     def resetPreviousTile(self):
         _offset = round(self.boardRenderer.board_size/8)
