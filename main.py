@@ -207,7 +207,6 @@ class BoardLogicHandler:
         self.cursorPosition = 0
         self.previousPosition = 0
         self.movements = [3,1,-1,-3]
-        self.current_player = self.game._inverse_player[self.game.turn]
         # 0 1 2
         # 3 4 5
         # 6 7 8
@@ -242,14 +241,14 @@ class BoardLogicHandler:
         ]
         self.renderer.drawRectangle(x1,y1,x2,y2,self.renderer.COLOURS["BLACK"])
         if self.game.board[self.previousPosition]:
-            self.boardRenderer.functions_proxy[self.game.board[self.previousPosition]](self.previousPosition, self.boardRenderer.player_colours[self.current_player])
+            self.boardRenderer.functions_proxy[self.game.board[self.previousPosition]](self.previousPosition, self.boardRenderer.player_colours[self.game._inverse_player[self.game.turn]])
         
 
     def drawToken(self) -> None:
         if self.game.board[self.cursorPosition]:
-            self.boardRenderer.functions_proxy[self.current_player](self.cursorPosition, self.renderer.COLOURS["RED"])
+            self.boardRenderer.functions_proxy[self.game._inverse_player[self.game.turn]](self.cursorPosition, self.renderer.COLOURS["RED"])
         else:
-            self.boardRenderer.functions_proxy[self.current_player](self.cursorPosition, self.renderer.COLOURS["PURPLE"])
+            self.boardRenderer.functions_proxy[self.game._inverse_player[self.game.turn]](self.cursorPosition, self.renderer.COLOURS["PURPLE"])
 
     def updateBuffer(self) -> None:
         self.renderEngine.updateFrameBuffer()
