@@ -225,6 +225,7 @@ class BoardLogicHandler:
             self.cursorPosition+=move
             self.resetPreviousTile()
             self.drawToken()
+            self.renderer.updateFrameBuffer()
             return True
     
     def confirmPosition(self) -> bool:
@@ -258,6 +259,7 @@ def new():
     mainGame = Game()
     board = BoardLogicHandler(mainGame,boardRenderer,renderEngine)
     keyboard = KeyBoardEventManager()
+    boardRenderer.drawBoard()
     while True:
         userInput = keyboard.getInput()
         if userInput:
