@@ -97,7 +97,7 @@ class RenderEngine:
                 cursor = 4
                 for y in range(height):
                     for x in range(width):
-                        self.queueLocalChange(x+start_x,y+start_y,(bytearray(data[cursor:cursor+3]).extend(b'\x00')))
+                        self.queueLocalChange(x+start_x,y+start_y,int.to_bytes(int.from_bytes(data[cursor:cursor+3], byteorder='little') << 8, byteorder='little'))
                         cursor+=3
             except FileNotFoundError as e:
                 raise e
