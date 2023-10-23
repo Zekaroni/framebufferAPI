@@ -228,7 +228,8 @@ class BoardLogicHandler:
             return False
     
     def confirmPosition(self) -> bool:
-        return self.game.Play(self.cursorPosition)
+        if self.game.Play(self.cursorPosition):
+            self.drawToken()
     
     def resetPreviousTile(self):
         _offset = round(self.boardRenderer.board_size/8)
