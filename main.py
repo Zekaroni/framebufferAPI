@@ -219,14 +219,14 @@ class BoardLogicHandler:
     def moveCursor(self, event: int) -> bool:
         move = self.movements[event]
         if -1 < (self.cursorPosition + move) < 9:
-            return False
-        else:
             self.previousPosition = self.cursorPosition
             self.cursorPosition+=move
             self.resetPreviousTile()
             self.drawToken()
             self.renderer.updateFrameBuffer()
             return True
+        else:
+            return False
     
     def confirmPosition(self) -> bool:
         return self.game.Play(self.cursorPosition)
