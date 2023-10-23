@@ -220,7 +220,6 @@ def start():
                 board.confirmPosition()
                 state = mainGame.CheckWinner()
                 if state != -1:
-                    print(state)
                     for token in state[1]:
                         boardRenderer.functions_proxy[state[0]](token,renderEngine.COLOURS["GREEN"])
                     renderEngine.updateFrameBuffer()
