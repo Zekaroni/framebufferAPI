@@ -207,9 +207,6 @@ class BoardLogicHandler:
         self.cursorPosition = 0
         self.previousPosition = 0
         self.movements = [3,1,-1,-3]
-        # 0 1 2
-        # 3 4 5
-        # 6 7 8
 
     def start(self):
         self.renderEngine.initTerminal()
@@ -229,19 +226,14 @@ class BoardLogicHandler:
     
     def confirmPosition(self) -> bool:
         if self.game.Play(self.cursorPosition):
-            self.boardRenderer.functions_proxy[self.game._inverse_player[self.game.turn]]
+            self.boardRenderer.functions_proxy[self.game.turn]
             self.drawToken()
             self.renderer.updateFrameBuffer()
     
     def resetPreviousTile(self):
         _offset = round(self.boardRenderer.board_size/8)
         _mid = self.boardRenderer.index_midpoints[self.previousPosition]
-        x1, y1, x2, y2 = [
-            self.boardRenderer.x_offset + _mid[0] - _offset,
-            self.boardRenderer.y_offset + _mid[1] - _offset,
-            self.boardRenderer.x_offset + _mid[0] + _offset,
-            self.boardRenderer.y_offset + _mid[1] + _offset
-        ]
+        x1, y1, x2, y2 = [self.boardRenderer.x_offset + _mid[0] - _offset,self.boardRenderer.y_offset + _mid[1] - _offset,self.boardRenderer.x_offset + _mid[0] + _offset,self.boardRenderer.y_offset + _mid[1] + _offset]
         self.renderer.drawRectangle(x1,y1,x2,y2,self.renderer.COLOURS["BLACK"])
         if self.game.board[self.previousPosition]:
             self.boardRenderer.functions_proxy[self.game.board[self.previousPosition]](self.previousPosition, self.boardRenderer.player_colours[self.game._inverse_player[self.game.turn]])
@@ -256,7 +248,7 @@ class BoardLogicHandler:
     def updateBuffer(self) -> None:
         self.renderEngine.updateFrameBuffer()
 
-def new():
+def start():
     renderEngine = RenderEngine()
     boardRenderer = TicTacToeRenderer(renderEngine)
     mainGame = Game()
@@ -273,30 +265,5 @@ def new():
             elif userInput[1] == 1:
                 board.moveCursor(userInput[0])
 
-
-def startGame() -> None:
-    renderEngine = RenderEngine()
-    board = TicTacToeRenderer(renderEngine)
-    game = Game()
-    renderEngine.initTerminal()
-    board.drawBoard()
-    renderEngine.updateFrameBuffer()
-    while True:
-        gameStatus = game.CheckWinner()
-        if gameStatus == -1:
-            valid_move = False
-            while not valid_move:
-                index = int(input("Enter index"))
-                valid_move = game.Play(index)
-            current_player = game._inverse_player[game.turn]
-            board.functions_proxy[current_player](index,board.player_colours[current_player])
-            renderEngine.updateFrameBuffer()
-        else:
-            print(gameStatus)
-            for token in gameStatus[1]:
-                board.functions_proxy[current_player](token,renderEngine.COLOURS["GREEN"])
-            renderEngine.updateFrameBuffer()
-            break
-
 if __name__ == "__main__":
-    new()
+    start()
