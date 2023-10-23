@@ -3,7 +3,6 @@ class Game:
         self.turn = 'X'
         self.board = ['','','','','','','','','',]
         self._win_states = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
-        self._player_proxy =  {"X" : 0,"O" : 1,} # TODO: Decide to remove or keep this
         self._inverse_player = {"X":"O","O":"X",}
     
     def Play(self, index: int) -> bool:
@@ -17,7 +16,7 @@ class Game:
         __winner = -1
         for win_state in self._win_states:
             _a, _b, _c = [[self.board[i],i] for i in win_state]
-            if (_a[0] or _b[0] or _c[0]) and (_a[0] == _b[0] == _c[0]): __winner = [self._player_proxy[self._inverse_player[self.turn]],[_a[1],_b[1],_c[1]]]
+            if (_a[0] or _b[0] or _c[0]) and (_a[0] == _b[0] == _c[0]): __winner = [self.turn,[_a[1],_b[1],_c[1]]]
         if len(''.join(self.board)) > 8 and __winner == -1: __winner = [2,None]
         return __winner
 
@@ -215,7 +214,7 @@ def start():
                 if state != -1:
                     print(state)
                     for token in state[1]:
-                        boardRenderer.functions_proxy[mainGame._player_proxy[state[0]]](token,renderEngine.COLOURS["GREEN"])
+                        boardRenderer.functions_proxy[state[0]](token,renderEngine.COLOURS["GREEN"])
                     renderEngine.updateFrameBuffer()
             elif userInput[0] == 5 and userInput[1] == 1:
                 exit(0)
