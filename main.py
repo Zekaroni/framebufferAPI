@@ -149,6 +149,10 @@ class KeyBoardEventManager:
         if evtype in self.KEYS and evtype!=self.UNKNOWN_EVENT:
             state = int.from_bytes(bytes(data[20:23]), byteorder='little')
             return [self.KEYS[evtype],state]
+    
+    def flushInputBuffer(self):
+        if self.device:
+            self.device.read(4096)
 
 class BoardLogicHandler:
     def __init__(self, game: Game, boardRenderer: TicTacToeRenderer, renderEngine: RenderEngine):
@@ -217,11 +221,13 @@ def start():
                     for token in state[1]:
                         boardRenderer.functions_proxy[state[0]](token,renderEngine.COLOURS["GREEN"])
                     renderEngine.updateFrameBuffer()
-                    exit()
+                    break
             elif userInput[0] == 5 and userInput[1] == 1:
-                exit(0)
+                break
             elif userInput[1] == 1:
                 board.moveCursor(userInput[0])
+    keyboard.flushInputBuffer()
+    exit(0)
 
 if __name__ == "__main__":
     start()
