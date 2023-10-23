@@ -223,7 +223,8 @@ class BoardLogicHandler:
         else:
             self.previousPosition = self.cursorPosition
             self.cursorPosition+=move
-            self.drawTokens()
+            self.resetPreviousTile()
+            self.drawToken()
             return True
     
     def confirmPosition(self) -> bool:
@@ -243,28 +244,24 @@ class BoardLogicHandler:
         
 
     def drawToken(self) -> None:
-
-        pass
+        if self.game.board[self.cursorPosition]:
+            self.boardRenderer.functions_proxy[self.current_player](self.cursorPosition, self.renderer.COLOURS["RED"])
+        else:
+            self.boardRenderer.functions_proxy[self.current_player](self.cursorPosition, self.renderer.COLOURS["PURPLE"])
 
     def updateBuffer(self) -> None:
         self.renderEngine.updateFrameBuffer()
-
-
-def keyboardTest():
-    keyboard = KeyBoardEventManager()
-    while True:
-        userInput = keyboard.getInput()
-        if userInput:
-            print(userInput)
 
 def new():
     renderEngine = RenderEngine()
     boardRenderer = TicTacToeRenderer(renderEngine)
     mainGame = Game()
     board = BoardLogicHandler(mainGame,boardRenderer,renderEngine)
-
-    
-
+    keyboard = KeyBoardEventManager()
+    while True:
+        userInput = keyboard.getInput()
+        if userInput:
+            print(userInput)
 
 
 def startGame() -> None:
@@ -291,4 +288,4 @@ def startGame() -> None:
             break
 
 if __name__ == "__main__":
-    startGame()
+    new()
