@@ -230,10 +230,16 @@ class BoardLogicHandler:
         return self.game.Play(self.cursorPosition)
     
     def resetPreviousTile(self):
-        _offset = round(self.boardRenderer.board_size/6)
-        _mid = self.boardRenderer.index_midpoints[self.previousPosition]
-        x1, y1, x2, y2 = ([_mid - _offset]*2) + ([_mid - _offset]*2)
+        _offset = round(self.game.board_size/8)
+        _mid = self.boardRenderer.index_midpoints[self.previous_position]
+        x1, y1, x2, y2 = [
+            self.x_offset + _mid[0] - _offset,
+            self.y_offset + _mid[1] - _offset,
+            self.x_offset + _mid[0] + _offset,
+            self.y_offset + _mid[1] + _offset
+        ]
         self.renderer.drawRectangle(x1,y1,x2,y2,self.renderer.COLOURS["BLACK"])
+        self.boardRenderer.functions_proxy[self.game.board[self.previousPosition]]
         
 
     def drawToken(self) -> None:
