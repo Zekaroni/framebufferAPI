@@ -155,7 +155,6 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     board_size = 600
     line_thickness = 5
     token_size = 10
-    previous_position = 0
 
     def resetPreviousTile(a):
         _offset = round(board_size/12)
@@ -192,10 +191,11 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
 
     funcs = [o, x]
     moves = [0,4,2,1,7,5,3,6,8]
+    previous_position = moves[0]
     for i in range(len(moves)):
         funcs[i%2](moves[i])
-        updateFrameBuffer()
         resetPreviousTile(i%2)
+        updateFrameBuffer()
         previous_position = moves[i]
         input()
 
