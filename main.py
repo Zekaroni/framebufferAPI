@@ -153,6 +153,7 @@ class KeyBoardEventManager:
     def flushInputBuffer(self):
         if self.DEVICE:
             self.DEVICE.read(4096)
+            self.DEVICE.close()
 
 class BoardLogicHandler:
     def __init__(self, game: Game, boardRenderer: TicTacToeRenderer, renderEngine: RenderEngine):
@@ -210,6 +211,7 @@ def start():
     renderEngine.initTerminal()
     keyboard = KeyBoardEventManager()
     boardRenderer.drawBoard()
+    renderEngine.updateFrameBuffer()
     while True:
         userInput = keyboard.getInput()
         if userInput:
