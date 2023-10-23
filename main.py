@@ -88,7 +88,7 @@ class RenderEngine:
         y = 0
         while y < radius:
             for i in range(thickness):
-                # TODO: Streamline these for loops
+                # TODO: Streamline these for loops, mostly finished but I feel there can be more
                 for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
                     [self.queueLocalChange(center_x + (radius*x_sign), center_y + (y*y_sign) + (i*o), colour) for o in [1,-1]]
                 for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:

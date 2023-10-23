@@ -146,58 +146,8 @@ def debug() -> None:
     drawRectangle(400,200,1200,400,COLOURS["YELLOW"])
     drawLine(0,0,200,200,COLOURS["WHITE"])
     drawCircle(300,150,150,COLOURS["PASTEL_PINK"],thickness=3)
+    readImage("image.zeke", start_x=500, start_y=300)
 
-
-
-def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
-    # TODO: Make some math logic that will detemine board size and render it accoding to variables
-    initTerminal()
-    board_size = 600
-    line_thickness = 5
-    token_size = 10
-
-    def resetPreviousTile(a):
-        _offset = round(board_size/8)
-        _mid = index_midpoints[previous_position]
-        x1, y1, x2, y2 = [
-            x_offset + _mid[0] - _offset,
-            y_offset + _mid[1] - _offset,
-            x_offset + _mid[0] + _offset,
-            y_offset + _mid[1] + _offset
-        ]
-        drawRectangle(x1,y1,x2,y2,COLOURS["BLUE"])
-        funcs[a](previous_position)
-
-    index_midpoints = [
-        [round(board_size/6), round(board_size/6)], [round(board_size/2),round(board_size/6)], [round(board_size*5/6),round(board_size/6)],
-        [round(board_size/6), round(board_size/2)], [round(board_size/2),round(board_size/2)], [round(board_size*5/6),round(board_size/2)],
-        [round(board_size/6), round(board_size*5/6)], [round(board_size/2),round(board_size*5/6)], [round(board_size*5/6),round(board_size*5/6)], 
-    ]
-
-    def o(index: int) -> None:
-        x, y = index_midpoints[index]
-        drawCircle(x_offset+x,y_offset+y,round(board_size*(token_size/100)),COLOURS["WHITE"])
-    
-    def x(index: int, colour: bytes = COLOURS["WHITE"]) -> None:
-        s = round(board_size*(token_size/100))
-        mid_x, mid_y = index_midpoints[index]
-        drawLine(x_offset+mid_x-s,y_offset+mid_y-s,x_offset+mid_x+s,y_offset+mid_y+s,colour)
-        drawLine(x_offset+mid_x-s,y_offset+mid_y+s,x_offset+mid_x+s,y_offset+mid_y-s, colour)
-
-    for i in [0.33,0.66]:
-        offset = round(board_size * i)
-        drawRectangle(x_offset,y_offset+offset,x_offset+board_size, y_offset+offset+line_thickness, COLOURS["WHITE"])
-        drawRectangle(x_offset+offset,y_offset,x_offset+offset+line_thickness,y_offset+board_size,COLOURS["WHITE"])
-
-    funcs = [o, x]
-    moves = [0,4,2,1,7,5,3,6,8]
-    previous_position = moves[0]
-    for i in range(len(moves)):
-        funcs[i%2](moves[i])
-        if i > 0: resetPreviousTile((i-1)%2)
-        updateFrameBuffer()
-        previous_position = moves[i]
-        input()
 
 if __name__ == "__main__":
     readImage("image.zeke")
