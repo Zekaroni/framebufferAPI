@@ -259,7 +259,8 @@ def start():
         if userInput:
             if userInput[0] == 4 and userInput[1] == 1:
                 board.confirmPosition()
-                if (state := mainGame.CheckWinner()) != -1:
+                state = mainGame.CheckWinner()
+                if state != -1:
                     for token in state[1]:
                         boardRenderer.functions_proxy[mainGame._player_proxy[state[0]]](token,renderEngine.COLOURS["GREEN"])
                     renderEngine.updateFrameBuffer()
