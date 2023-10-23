@@ -110,7 +110,7 @@ def debug() -> None:
     """
     renderer = RenderEngine()
 
-    renderer.initTerminal()
+    # renderer.initTerminal()
     # renderer.drawRectangle(400,200,1200,400,renderer.COLOURS["YELLOW"])
     # renderer.drawLine(0,0,200,200,renderer.COLOURS["WHITE"])
     # renderer.drawCircle(300,150,150,renderer.COLOURS["PASTEL_PINK"],thickness=3)
