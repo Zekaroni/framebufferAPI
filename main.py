@@ -3,9 +3,8 @@ class Game:
         self.turn = 'X'
         self.board = ['','','','','','','','','',]
         self._win_states = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
-        self._player_proxy =  {"X" : 0,"O" : 1,}
+        self._player_proxy =  {"X" : 0,"O" : 1,} # TODO: Decide to remove or keep this
         self._inverse_player = {"X":"O","O":"X",}
-        self._outcomes = ['X','O','T']
     
     def Play(self, index: int) -> bool:
         if not self.board[index]:
@@ -260,6 +259,11 @@ def start():
         if userInput:
             if userInput[0] == 4 and userInput[1] == 1:
                 board.confirmPosition()
+                if (state := mainGame.CheckWinner()) != -1:
+                    for token in state[1]:
+                        boardRenderer.functions_proxy[mainGame._player_proxy[state[0]]](token,renderEngine.COLOURS["GREEN"])
+                    renderEngine.updateFrameBuffer()
+                    exit()
             elif userInput[0] == 5 and userInput[1] == 1:
                 exit(0)
             elif userInput[1] == 1:
