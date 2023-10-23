@@ -194,7 +194,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     previous_position = moves[0]
     for i in range(len(moves)):
         funcs[i%2](moves[i])
-        resetPreviousTile(i%2)
+        resetPreviousTile((i-1)%2)
         updateFrameBuffer()
         previous_position = moves[i]
         input()
