@@ -261,7 +261,8 @@ def new():
     while True:
         userInput = keyboard.getInput()
         if userInput:
-            print(userInput)
+            if userInput[1] == 1:
+                board.moveCursor(userInput[0])
 
 
 def startGame() -> None:
