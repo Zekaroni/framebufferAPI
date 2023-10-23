@@ -91,11 +91,9 @@ class RenderEngine:
                 # TODO: Streamline these for loops
                 for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
                     self.queueLocalChange(center_x + (radius*x_sign), center_y + (y*y_sign) + i, colour)
-                for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
-                    self.queueLocalChange(center_x + (y*y_sign), center_y + (radius*x_sign) + i, colour)
-                for x_sign, y_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
                     self.queueLocalChange(center_x + (radius*x_sign), center_y + (y*y_sign) - i, colour)
                 for y_sign, x_sign in [[1,1],[1,-1],[-1,1],[-1,-1]]:
+                    self.queueLocalChange(center_x + (y*y_sign), center_y + (radius*x_sign) + i, colour)
                     self.queueLocalChange(center_x + (y*y_sign), center_y + (radius*x_sign) - i, colour)
             e+=2*y+1
             y+=1
