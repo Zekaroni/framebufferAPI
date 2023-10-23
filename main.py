@@ -152,7 +152,7 @@ class KeyBoardEventManager:
     
     def flushInputBuffer(self):
         if self.DEVICE:
-            self.DEVICE.read(1024)
+            self.DEVICE.read(128)
             self.DEVICE.close()
 
 class BoardLogicHandler:
