@@ -16,7 +16,7 @@ class Game:
         __winner = -1
         for win_state in self._win_states:
             _a, _b, _c = [[self.board[i],i] for i in win_state]
-            if (_a[0] or _b[0] or _c[0]) and (_a[0] == _b[0] == _c[0]): __winner = [self.turn,[_a[1],_b[1],_c[1]]]
+            if (_a[0] or _b[0] or _c[0]) and (_a[0] == _b[0] == _c[0]): __winner = [self._inverse_player[self.turn],[_a[1],_b[1],_c[1]]]
         if len(''.join(self.board)) > 8 and __winner == -1: __winner = [2,None]
         return __winner
 
@@ -151,8 +151,8 @@ class KeyBoardEventManager:
             return [self.KEYS[evtype],state]
     
     def flushInputBuffer(self):
-        if self.device:
-            self.device.read(4096)
+        if self.DEVICE:
+            self.DEVICE.read(4096)
 
 class BoardLogicHandler:
     def __init__(self, game: Game, boardRenderer: TicTacToeRenderer, renderEngine: RenderEngine):
