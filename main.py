@@ -152,7 +152,7 @@ class KeyBoardEventManager:
     
     def flushInputBuffer(self):
         if self.DEVICE:
-            self.DEVICE.read(4096)
+            self.DEVICE.read(128)
             self.DEVICE.close()
 
 class BoardLogicHandler:
@@ -210,6 +210,7 @@ def start():
     board = BoardLogicHandler(mainGame,boardRenderer,renderEngine)
     renderEngine.initTerminal()
     keyboard = KeyBoardEventManager()
+    board.moveCursor(0)
     boardRenderer.drawBoard()
     renderEngine.updateFrameBuffer()
     while True:
