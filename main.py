@@ -264,7 +264,6 @@ def start():
                     for token in state[1]:
                         boardRenderer.functions_proxy[mainGame._player_proxy[state[0]]](token,renderEngine.COLOURS["GREEN"])
                     renderEngine.updateFrameBuffer()
-                    exit()
             elif userInput[0] == 5 and userInput[1] == 1:
                 exit(0)
             elif userInput[1] == 1:
