@@ -137,18 +137,18 @@ class KeyBoardEventManager:
         self.KEYS = {27648:0,27136:1,26880:2,26368:3,7168:4,256:5,}
         self.UNKNOWN_EVENT = 1024
         self.EVENT_SIZE = 24
+        self.DEVICE = open(self.KEYBOARD_DEVICE, "rb")
 
     def getInput(self):
-        with open(self.KEYBOARD_DEVICE, "rb") as f:
-            f.read(self.EVENT_SIZE) # Reads the unknow thing. TODO: figure out what that is for
-            event_data = f.read(self.EVENT_SIZE)
-            if len(event_data) != self.EVENT_SIZE:
-                return 0
-            data = bytearray(event_data)
-            evtype = int.from_bytes(bytes(data[17:20]), byteorder='little')
-            if evtype in self.KEYS and evtype!=self.UNKNOWN_EVENT:
-                state = int.from_bytes(bytes(data[20:23]), byteorder='little')
-                return [self.KEYS[evtype],state]
+        self.DEVICE.read(self.EVENT_SIZE) # Reads the unknow thing. TODO: figure out what that is for
+        event_data = self.DEVICE.read(self.EVENT_SIZE)
+        if len(event_data) != self.EVENT_SIZE:
+            return 0
+        data = bytearray(event_data)
+        evtype = int.from_bytes(bytes(data[17:20]), byteorder='little')
+        if evtype in self.KEYS and evtype!=self.UNKNOWN_EVENT:
+            state = int.from_bytes(bytes(data[20:23]), byteorder='little')
+            return [self.KEYS[evtype],state]
 
 class BoardLogicHandler:
     def __init__(self, game: Game, boardRenderer: TicTacToeRenderer, renderEngine: RenderEngine):
