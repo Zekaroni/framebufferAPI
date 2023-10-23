@@ -150,5 +150,5 @@ def debug() -> None:
 
 
 if __name__ == "__main__":
-    readImage("image.zeke")
+    debug()
     updateFrameBuffer()
