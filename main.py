@@ -1,9 +1,9 @@
 class Game:
     def __init__(self):
-        self.turn = 0
-        self.board = ['','','','','','','','','',]
+        self.turn = 1
+        self.board = [0]*9
         self._win_states = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
-        self._inverse_player = {0:1,1:0,}
+        self._inverse_player = {1:2,2:1,}
     
     def Play(self, index: int) -> bool:
         if not self.board[index]:
@@ -17,7 +17,7 @@ class Game:
         for win_state in self._win_states:
             _a, _b, _c = [[self.board[i],i] for i in win_state]
             if (_a[0] or _b[0] or _c[0]) and (_a[0] == _b[0] == _c[0]): __winner = [self._inverse_player[self.turn],[_a[1],_b[1],_c[1]]]
-        if len(''.join(self.board)) > 8 and __winner == -1: __winner = [2,None]
+        if 0 not in self.board and __winner == -1: __winner = [2,None]
         return __winner
 
     def NewGame(self) -> None:
@@ -112,8 +112,8 @@ class TicTacToeRenderer:
         self.line_thickness = line_thickness
         self.token_size = token_size
         self.index_midpoints = [[round(board_size/6), round(board_size/6)], [round(board_size/2),round(board_size/6)], [round(board_size*5/6),round(board_size/6)],[round(board_size/6), round(board_size/2)], [round(board_size/2),round(board_size/2)], [round(board_size*5/6),round(board_size/2)],[round(board_size/6), round(board_size*5/6)], [round(board_size/2),round(board_size*5/6)], [round(board_size*5/6),round(board_size*5/6)], ]
-        self.player_colours = {0:self.renderer.COLOURS["WHITE"], 1:self.renderer.COLOURS["WHITE"]}
-        self.functions_proxy = {0: self.drawX, 1: self.drawO}
+        self.player_colours = {1:self.renderer.COLOURS["WHITE"], 2:self.renderer.COLOURS["WHITE"]}
+        self.functions_proxy = {1: self.drawX, 2: self.drawO}
 
     def drawO(self, index: int, colour: bytes) -> None:
         x, y = self.index_midpoints[index]
