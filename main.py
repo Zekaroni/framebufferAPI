@@ -100,7 +100,7 @@ class RenderEngine:
             e+=2*y+1
             y+=1
             if e >= 0:
-                e-=2*radius-1
+                e-2*radius-1
                 radius-=1
 
 class TicTacToeRenderer:
