@@ -231,7 +231,7 @@ class BoardLogicHandler:
         return self.game.Play(self.cursorPosition)
     
     def resetPreviousTile(self):
-        _offset = round(self.game.board_size/8)
+        _offset = round(self.boardRenderer.board_size/8)
         _mid = self.boardRenderer.index_midpoints[self.previous_position]
         x1, y1, x2, y2 = [
             self.x_offset + _mid[0] - _offset,
