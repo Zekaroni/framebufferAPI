@@ -160,7 +160,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     def resetPreviousTile():
         _offset = round(board_size/6)
         _mid = index_midpoints[previous_position]
-        x1, y1, x2, y2 = ([_mid - _offset]*2) + ([_mid - _offset]*2)
+        x1, y1, x2, y2 = [_mid[0] - _offset, _mid[1] - _offset, _mid[0] + _offset, _mid[1] + offset]
         drawRectangle(x1,y1,x2,y2,COLOURS["BLACK"])
 
     index_midpoints = [
