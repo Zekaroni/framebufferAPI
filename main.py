@@ -229,6 +229,7 @@ class BoardLogicHandler:
     
     def confirmPosition(self) -> bool:
         if self.game.Play(self.cursorPosition):
+            self.resetPreviousTile()
             self.drawToken()
             self.renderer.updateFrameBuffer()
     
