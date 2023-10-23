@@ -157,7 +157,7 @@ def drawTicTacToeBoard(x_offset: int = 0, y_offset: int = 0) -> None:
     token_size = 10
 
     def resetPreviousTile(a):
-        _offset = round(board_size/12)
+        _offset = round(board_size/6)
         _mid = index_midpoints[previous_position]
         x1, y1, x2, y2 = [
             x_offset + _mid[0] - _offset,
