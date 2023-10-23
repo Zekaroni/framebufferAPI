@@ -165,8 +165,10 @@ class BoardLogicHandler:
         self.movements = [3,1,-1,-3]
 
     def start(self):
-        self.renderEngine.initTerminal()
+        self.renderer.initTerminal()
+        self.drawToken()
         self.boardRenderer.drawBoard()
+        self.renderer.updateFrameBuffer()
 
     def moveCursor(self, event: int) -> bool:
         move = self.movements[event]
