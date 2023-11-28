@@ -147,9 +147,7 @@ class KeyBoardEventManager:
             return [self.KEYS[evtype],state]
     
     def flushInputBuffer(self):
-        if self.DEVICE:
-            self.DEVICE.read(128)
-            self.DEVICE.close()
+        input("Press enter to exit.")
 
 class BoardLogicHandler:
     def __init__(self, game: Game, boardRenderer: TicTacToeRenderer, renderEngine: RenderEngine):
