@@ -86,9 +86,9 @@ int main()
     {
         for (int o = 0; o < renderEngine.getWidth(); o++)
         {
-            int a = o * o % 11;
-            int g = static_cast<int>(i / o) % 11;
-            int r = static_cast<int>(o / i) % 11;
+            uint8_t a = o * o % 11;
+            uint8_t g = static_cast<int>(i / (o+1)) % 11;
+            uint8_t r = static_cast<int>(o / (i+1)) % 11;
             uint8_t pixel[4] = {a,g,r,0};
             localbuffer[index]   = pixel[0];
             localbuffer[index+1] = pixel[1];
