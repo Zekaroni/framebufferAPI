@@ -5,9 +5,6 @@ def convertRGBtoBGRA(r:int, g:int, b:int) -> bytes:
     g = g << (8)
     return (r + g + b).to_bytes(3,'little')
 
-# -25%
-
-
 im = Image.open("image.jpg")
 
 outputFile = open("image.zeke", "wb")
