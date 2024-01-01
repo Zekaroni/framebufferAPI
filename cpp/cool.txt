@@ -1,0 +1,4 @@
+            int a = i % 11 * o;
+            int g = i % 7 * o;
+            int r = i % 5 * o;
+            
