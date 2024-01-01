@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
+#include <cstdlib>
 
 class RenderEngine
 {public:
@@ -77,7 +78,7 @@ int main()
 {
     RenderEngine renderEngine;
     int index = 0;
-    uint8_t pixel[4] = {0,0,255,0};
+    std::srand(std::time(0));
 
     uint8_t localbuffer[renderEngine.getTotalPixels() * 4];
 
@@ -85,6 +86,10 @@ int main()
     {
         for (int o = 0; o < renderEngine.getWidth(); o++)
         {
+            int a = std::rand();
+            int g = std::rand();
+            int r = std::rand();
+            uint8_t pixel[4] = {a,g,r,0};
             localbuffer[index]   = pixel[0];
             localbuffer[index+1] = pixel[1];
             localbuffer[index+2] = pixel[2];
