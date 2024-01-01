@@ -87,7 +87,7 @@ int main()
     {
         for (int o = 0; o < renderEngine.getWidth(); o++)
         {
-            uint8_t b = o/1920 * 255;
+            uint8_t b = static_cast<int>(o/1920 * 255);
             uint8_t g = o/1920 * 255;
             uint8_t r = o/1920 * 255;
             uint8_t pixel[4] = {b,g,r,0};
